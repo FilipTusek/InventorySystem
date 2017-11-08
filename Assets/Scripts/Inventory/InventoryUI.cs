@@ -10,6 +10,8 @@ public class InventoryUI : MonoBehaviour
 
     private Inventory _inventory;
 
+    private bool _stacked = false;
+
     private void Start ( )
     {
         _inventory = Inventory.instance;
@@ -33,25 +35,47 @@ public class InventoryUI : MonoBehaviour
         {
             if(i < _inventory.Items.Count)
             {
-                if(_inventory.Items[i].TypeOfItem == ItemType.StackableItem)
-                {                    
-                    if(slots[i].Item != null && slots [i].Item.ItemName == _inventory.Items[i].ItemName)
+                if(_inventory.Items[_inventory.Items.Count - 1].TypeOfItem == ItemType.StackableItem)
+                {
+                    StackableItem stackableItem = (StackableItem) _inventory.Items [i];
+                    slots [i].StackableItemData.LimitedStackSize = stackableItem.HasStackLimit;
+
+                    if (slots [i].Item != null && slots [i].Item.ItemName == _inventory.Items [_inventory.Items.Count - 1].ItemName)
                     {
-                        if (slots [i].StackableItemData.StackSize < slots [i].StackableItemData.StackLimit)
+                        if (slots [i].StackableItemData.LimitedStackSize)
                         {
-                            slots [i].StackableItemData.StackSize++;
-                            slots [i].StackableItemData.UpdateStack ();
-                            _inventory.Items.RemoveAt (i);
+                            if (slots [i].StackableItemData.StackSize < slots [i].StackableItemData.StackLimit)
+                            {
+                                if (!_stacked)
+                                {
+                                    slots [i].StackableItemData.StackSize++;
+                                    slots [i].StackableItemData.UpdateStack ();
+
+                                    _inventory.Items.RemoveAt (_inventory.Items.Count - 1);
+                                    _stacked = true;
+                                }
+                            }
+                            else
+                            {
+                                slots [i].AddItem (_inventory.Items [i]);                                
+                            }
                         }
                         else
                         {
-                            slots [i].AddItem (_inventory.Items [i]);
+                            if (!_stacked)
+                            {
+                                slots [i].StackableItemData.StackSize++;
+                                slots [i].StackableItemData.UpdateStack ();
+
+                                _inventory.Items.RemoveAt (_inventory.Items.Count - 1);
+                                _stacked = true;
+                            }
                         }
                     }
                     else
                     {
                         slots [i].AddItem (_inventory.Items [i]);
-                    }                    
+                    }
                 }
                 else
                 {
@@ -62,6 +86,7 @@ public class InventoryUI : MonoBehaviour
             {
                 slots [i].ClearSlot ();
             }
-        }       
+        }
+        _stacked = false;
     }    
 }

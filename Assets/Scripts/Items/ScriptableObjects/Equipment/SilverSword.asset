@@ -8,10 +8,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93a635f4882714f4cb208f1da6c5c293, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ade6d6c9cb0e544799190e4ef624d03, type: 3}
   m_Name: SilverSword
   m_EditorClassIdentifier: 
   ItemName: Silver Sword
   Icon: {fileID: 21300000, guid: f2bbcce74669b9a4e9ec8421d230da48, type: 3}
   TypeOfItem: 1
   HasStackLimit: 1
+  EquipmentSlot: 1
+  StrengthModifier: 0
+  DexterityModifier: 2
+  AgilityModifier: 0
+  InteligenceModifier: 0

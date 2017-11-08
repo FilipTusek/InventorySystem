@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: addcf419492b70044a45f5cd4951e7f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MyItem: {fileID: 11400000, guid: 5092dd9be0f154e43bdbab645613ba99, type: 2}
+  MyItem: {fileID: 11400000, guid: 51d311c8c4590ab46bb15a63a33bd4f3, type: 2}
   PickupRadius: 1
   DistanceToPlayer: 0
 --- !u!212 &212192123336529190

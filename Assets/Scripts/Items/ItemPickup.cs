@@ -14,6 +14,7 @@ public class ItemPickup : MonoBehaviour, IPointerClickHandler
     private Transform _player;
     private PlayerController _playerController;
     private Inventory _inventory;
+    private EquipmentManager _equipmentManager;
 
     private void Awake ( )
     {
@@ -24,6 +25,7 @@ public class ItemPickup : MonoBehaviour, IPointerClickHandler
     {
         _playerController = PlayerController.instance;
         _inventory = Inventory.instance;
+        _equipmentManager = EquipmentManager.instance;
     }
 
     private void Update ( )
@@ -33,8 +35,29 @@ public class ItemPickup : MonoBehaviour, IPointerClickHandler
 
     public void PickUp()
     {
-        _inventory.Add (MyItem);
-        Destroy (gameObject);       
+        switch(MyItem.TypeOfItem)
+        {
+            case ItemType.EquipableItem:
+                Equipment equipment = (Equipment) MyItem;
+
+                int slotIndex = (int) equipment.EquipmentSlot;
+
+                if (_equipmentManager.CurrentEquipment [slotIndex] == null)
+                {
+                    _equipmentManager.Equip (equipment);
+                }
+                else
+                {
+                    _inventory.Add (MyItem);
+                }
+                break;
+
+            case ItemType.StackableItem:
+                break;
+
+            case ItemType.PermanentUsageItem:
+                break;
+        }             
     }
 
     private void OnDrawGizmosSelected ( )

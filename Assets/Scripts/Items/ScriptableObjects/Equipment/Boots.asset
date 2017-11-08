@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ade6d6c9cb0e544799190e4ef624d03, type: 3}
+  m_Name: Boots
+  m_EditorClassIdentifier: 
+  ItemName: Boots
+  Icon: {fileID: 21300000, guid: 4265166bf2d49c740be2455ea0c06405, type: 3}
+  TypeOfItem: 1
+  HasStackLimit: 1
+  EquipmentSlot: 3
+  StrengthModifier: 0
+  DexterityModifier: 0
+  AgilityModifier: 5
+  InteligenceModifier: 0

@@ -8,9 +8,18 @@ public class Item : ScriptableObject
     public string ItemName = "New Item";
 
     public Sprite Icon = null;    
-    
-    public enum ItemType { PermanentUsageItem, EquipableItem, StackableItem }
-    public ItemType TypeOfItem;
+        
+    public ItemType TypeOfItem;    
 
-    public bool HasStackLimit = true;
+    public virtual void Use()
+    {
+
+    }
+
+    public void RemoveFromInventroy()
+    {
+        Inventory.instance.Remove (this);
+    }
 }
+
+public enum ItemType { PermanentUsageItem, EquipableItem, StackableItem }

@@ -4,20 +4,41 @@ using UnityEngine.UI;
 public class InventroySlot : MonoBehaviour
 {
     public Image Icon;
+    public Text StackNumber;
 
-    private Item _item;
+    public StackableItemData StackableItemData;
+
+    public Item Item;  
+
+    private void Awake ( )
+    {
+        StackableItemData = GetComponent<StackableItemData> ();
+    }
 
     public void AddItem(Item newItem)
     {
-        _item = newItem;
+        Item = newItem;
 
-        Icon.sprite = _item.Icon;
+        Icon.sprite = Item.Icon;
         Icon.enabled = true;
+
+        if(newItem.TypeOfItem == ItemType.StackableItem)
+        {
+            StackableItem stackableItem = (StackableItem) newItem;
+            
+            StackNumber.enabled = true;
+            StackableItemData.StackLimit = stackableItem.StackLimit;
+            StackableItemData.UpdateStack ();                      
+        }
+        else
+        {
+            StackNumber.enabled = false;
+        }
     } 
     
     public void ClearSlot()
     {
-        _item = null;
+        Item = null;
 
         Icon.sprite = null;
         Icon.enabled = false;
@@ -25,15 +46,15 @@ public class InventroySlot : MonoBehaviour
 
     public void DropItem()
     {
-        Inventory.instance.Remove (_item);
+        Inventory.instance.Remove (Item);
         //Drop item to the floor
     }
 
     public void UseItem()
     {
-        if(_item != null)
+        if(Item != null)
         {
-            _item.Use ();
+            Item.Use ();
         }
     }
 }

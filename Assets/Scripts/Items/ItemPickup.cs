@@ -45,14 +45,18 @@ public class ItemPickup : MonoBehaviour, IPointerClickHandler
                 if (_equipmentManager.CurrentEquipment [slotIndex] == null)
                 {
                     _equipmentManager.Equip (equipment);
+                    Destroy (gameObject);
                 }
                 else
                 {
                     _inventory.Add (MyItem);
+                    Destroy (gameObject);
                 }
                 break;
 
             case ItemType.StackableItem:
+                _inventory.Add (MyItem);
+                Destroy (gameObject);
                 break;
 
             case ItemType.PermanentUsageItem:

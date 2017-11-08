@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4547466419322844}
   - component: {fileID: 212522719206817344}
   - component: {fileID: 114763614306846502}
+  - component: {fileID: 114858521107664682}
   - component: {fileID: 50498837812197552}
   - component: {fileID: 61279304697172786}
   m_Layer: 0
@@ -102,6 +103,17 @@ MonoBehaviour:
   MyItem: {fileID: 11400000, guid: eae5e96a5714c674d83f74b20b9602a7, type: 2}
   PickupRadius: 1
   DistanceToPlayer: 0
+--- !u!114 &114858521107664682
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1958599018485530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28d9b0cc5464b3a4da90c906b739b7ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212522719206817344
 SpriteRenderer:
   m_ObjectHideFlags: 1

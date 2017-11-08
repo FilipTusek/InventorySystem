@@ -33,7 +33,30 @@ public class InventoryUI : MonoBehaviour
         {
             if(i < _inventory.Items.Count)
             {
-                slots [i].AddItem (_inventory.Items [i]);
+                if(_inventory.Items[i].TypeOfItem == ItemType.StackableItem)
+                {                    
+                    if(slots[i].Item != null && slots [i].Item.ItemName == _inventory.Items[i].ItemName)
+                    {
+                        if (slots [i].StackableItemData.StackSize < slots [i].StackableItemData.StackLimit)
+                        {
+                            slots [i].StackableItemData.StackSize++;
+                            slots [i].StackableItemData.UpdateStack ();
+                            _inventory.Items.RemoveAt (i);
+                        }
+                        else
+                        {
+                            slots [i].AddItem (_inventory.Items [i]);
+                        }
+                    }
+                    else
+                    {
+                        slots [i].AddItem (_inventory.Items [i]);
+                    }                    
+                }
+                else
+                {
+                    slots [i].AddItem (_inventory.Items [i]);
+                }                
             }
             else
             {

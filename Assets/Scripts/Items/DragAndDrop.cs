@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 public class DragAndDrop : MonoBehaviour, IPointerClickHandler
 {
     private Transform _playerTransform;
+    private Transform _slotTransform;
 
     private GameObject _inventoryScreen;
     private GameObject _equipmentScreen;    
@@ -14,6 +15,7 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler
     private bool _isDragged = false;
 
     private GameManager _gameManager;
+    
 
     private void Awake ( )
     {
@@ -24,7 +26,8 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler
 
     private void Start ( )
     {
-        _gameManager = GameManager.instance;        
+        _gameManager = GameManager.instance;
+        _slotTransform = transform.parent.parent.transform;
     }
 
     private void Update ( )
@@ -46,7 +49,8 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler
             if (!_isDragged)
             {
                 _isDragged = true;
-                _gameManager.ItemBeingDragged = true;                
+                _gameManager.ItemBeingDragged = true;
+                transform.SetParent (transform.root.transform);
             }            
         }
         else
@@ -55,6 +59,7 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler
             {
                 _isDragged = false;
                 _gameManager.ItemBeingDragged = false;
+                transform.SetParent (_slotTransform);
             }
         }
     }

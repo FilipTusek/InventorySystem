@@ -27,15 +27,6 @@ public class InventoryUI : MonoBehaviour
 
     private void UpdateUI()
     {
-        if (_inventory.Items.Count > slots.Length)
-        {
-            for (int i = 0; i < 8; i++)
-            {
-                Instantiate (InventorySlotGameObject, ItemsParent);
-                slots = ItemsParent.GetComponentsInChildren<InventroySlot> ();
-            }
-        }
-
         for (int i = 0; i < slots.Length; i++)
         {
             if(i < _inventory.Items.Count)
@@ -97,5 +88,14 @@ public class InventoryUI : MonoBehaviour
             }
         }
         _stacked = false;
+
+        if (_inventory.Items.Count > slots.Length)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                Instantiate (InventorySlotGameObject, ItemsParent);
+                slots = ItemsParent.GetComponentsInChildren<InventroySlot> ();
+            }
+        }
     }    
 }

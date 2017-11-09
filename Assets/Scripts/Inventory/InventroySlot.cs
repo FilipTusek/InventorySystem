@@ -8,12 +8,7 @@ public class InventroySlot : MonoBehaviour
 
     public StackableItemData StackableItemData;
 
-    public Item Item;  
-
-    private void Start ( )
-    {
-        StackableItemData = GetComponent<StackableItemData> ();
-    }
+    public Item Item;     
 
     public void AddItem(Item newItem)
     {
@@ -26,18 +21,16 @@ public class InventroySlot : MonoBehaviour
         {
             StackableItem stackableItem = (StackableItem) newItem;
 
+            StackableItemData = GetComponent<StackableItemData> ();
+
             if (stackableItem.HasStackLimit)
             {
-                StackableItemData = GetComponent<StackableItemData> ();
-
                 StackNumber.enabled = true;
                 StackableItemData.StackLimit = stackableItem.StackLimit;
                 StackableItemData.UpdateStack ();
             }
             else
             {
-                StackableItemData = GetComponent<StackableItemData> ();
-
                 StackNumber.enabled = true;
                 StackableItemData.UpdateStack ();
             }

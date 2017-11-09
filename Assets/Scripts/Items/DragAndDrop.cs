@@ -53,9 +53,10 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler
             }
             else
             {
-                transform.SetParent (_slotTransform);
-                transform.localPosition = Vector2.zero;
                 _isDragged = false;
+                _dragAndDropManager.ItemBeingDragged = false;
+                transform.SetParent (_slotTransform);
+                _dragAndDropManager.DraggedItem = null;
                 _itemImage.raycastTarget = true;
             }
         }

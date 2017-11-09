@@ -8,33 +8,29 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler
 {
     public bool OverAvailableSlot = false;
     public bool OverInventorySlot = false;
+    public bool IsDragged = false;
 
     public InventorySlot Slot;
-
-    private Transform _playerTransform;
+   
     private Transform _slotTransform;
 
     private GameObject _inventoryScreen;
-    private GameObject _equipmentScreen;    
-
-    private bool _isDragged = false;
+    private GameObject _equipmentScreen;      
 
     private DragAndDropManager _dragAndDropManager;
     private EquipmentManager _equipmentManager;
     private Inventory _inventory;
 
     private Image _itemImage;
-    
 
     private void Awake ( )
     {
-        _playerTransform = GameObject.Find ("Player").transform;
         _inventoryScreen = GameObject.Find ("InventoryPanel");
         _equipmentScreen = GameObject.Find ("EquipmentPanel");
     }
 
     private void Start ( )
-    {
+    {       
         _dragAndDropManager = DragAndDropManager.instance;
         _slotTransform = transform.parent.transform;
         Slot = GetComponentInParent<InventorySlot>();
@@ -45,7 +41,7 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler
 
     private void Update ( )
     {
-        if (_isDragged)
+        if (IsDragged)
         {
             if (_inventoryScreen.activeSelf || _equipmentScreen.activeSelf)
             {
@@ -53,7 +49,7 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler
             }
             else
             {
-                _isDragged = false;
+                IsDragged = false;
                 _dragAndDropManager.ItemBeingDragged = false;
                 transform.SetParent (_slotTransform);
                 _dragAndDropManager.DraggedItem = null;
@@ -62,7 +58,9 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler
         }
         else
         {
+            transform.SetParent (_slotTransform);
             transform.localPosition = Vector2.zero;
+            _itemImage.raycastTarget = true;
         }
     }
 
@@ -70,9 +68,9 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler
     {
         if (!_dragAndDropManager.ItemBeingDragged)
         {
-            if (!_isDragged)
+            if (!IsDragged)
             {
-                _isDragged = true;
+                IsDragged = true;
                 _dragAndDropManager.ItemBeingDragged = true;
                 transform.SetParent (transform.root.transform);
                 _dragAndDropManager.DraggedItemSlot = _slotTransform.gameObject.GetComponent<InventorySlot> ();
@@ -82,13 +80,13 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler
         }
         else
         {
-            if (_isDragged)
+            if (IsDragged)
             {
                 if (!OverAvailableSlot)
                 {
                     if (!OverInventorySlot)
                     {
-                        _isDragged = false;
+                        IsDragged = false;
                         _dragAndDropManager.ItemBeingDragged = false;
                         transform.SetParent (_slotTransform);
                         _dragAndDropManager.DraggedItem = null;
@@ -96,7 +94,7 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler
                     }
                     else
                     {
-                        _isDragged = false;
+                        IsDragged = false;
                         _dragAndDropManager.ItemBeingDragged = false;
                         transform.SetParent (_slotTransform);
                         _dragAndDropManager.DraggedItem = null;
@@ -107,7 +105,7 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler
                 }
                 else if (OverAvailableSlot)
                 {
-                    _isDragged = false;
+                    IsDragged = false;
                     _dragAndDropManager.ItemBeingDragged = false;                    
                     _equipmentManager.Equip ((Equipment) Slot.Item);
                     Slot.Item.RemoveFromInventroy ();

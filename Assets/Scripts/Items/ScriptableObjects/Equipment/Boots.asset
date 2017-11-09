@@ -13,8 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemName: Boots
   Icon: {fileID: 21300000, guid: 4265166bf2d49c740be2455ea0c06405, type: 3}
+  ItemPrefab: {fileID: 1410316974531218, guid: 12b608d2fbd6d794bb9a07cfb930cbf1, type: 2}
   TypeOfItem: 1
-  HasStackLimit: 1
   EquipmentSlot: 3
   StrengthModifier: 0
   DexterityModifier: 0

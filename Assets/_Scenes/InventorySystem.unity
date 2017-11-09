@@ -1485,6 +1485,16 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114732558090018418, guid: 01d3e57ca507ee7469a806ebef70f6fc,
+        type: 2}
+      propertyPath: _inventoryScreen
+      value: 
+      objectReference: {fileID: 1144460917}
+    - target: {fileID: 114732558090018418, guid: 01d3e57ca507ee7469a806ebef70f6fc,
+        type: 2}
+      propertyPath: _equipmentScreen
+      value: 
+      objectReference: {fileID: 1702210282}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 01d3e57ca507ee7469a806ebef70f6fc, type: 2}
   m_IsPrefabParent: 0
@@ -4907,6 +4917,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1144460918}
   - component: {fileID: 1144460920}
+  - component: {fileID: 1144460919}
   m_Layer: 5
   m_Name: InventoryPanel
   m_TagString: Untagged
@@ -4934,6 +4945,17 @@ RectTransform:
   m_AnchoredPosition: {x: -0.9, y: 24}
   m_SizeDelta: {x: 998.3, y: 465}
   m_Pivot: {x: 0.5, y: 0}
+--- !u!114 &1144460919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1144460917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae04fe98118289140a8e5bd10b3202d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!222 &1144460920
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6728,6 +6750,7 @@ GameObject:
   - component: {fileID: 1702210283}
   - component: {fileID: 1702210285}
   - component: {fileID: 1702210284}
+  - component: {fileID: 1702210286}
   m_Layer: 5
   m_Name: EquipmentPanel
   m_TagString: Untagged
@@ -6792,6 +6815,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1702210282}
+--- !u!114 &1702210286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1702210282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae04fe98118289140a8e5bd10b3202d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1718058601
 Prefab:
   m_ObjectHideFlags: 0
@@ -7465,6 +7499,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemBeingDragged: 0
+  DropItem: 0
   DraggedItemSlot: {fileID: 0}
   DraggedItem: {fileID: 0}
 --- !u!1 &1859518521

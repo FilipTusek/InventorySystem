@@ -13,6 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemName: Karababovs Potion Of Minor Draining
   Icon: {fileID: 21300000, guid: 9f89ab123bec686459026f99a6ce513e, type: 3}
+  ItemPrefab: {fileID: 1111281745269744, guid: b1951fe0ec5fdd9419e29e65b8c32007, type: 2}
   TypeOfItem: 2
   HasStackLimit: 0
   StackLimit: 0

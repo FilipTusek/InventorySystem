@@ -209,7 +209,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OverAvailableSlot: 0
+  OverInventorySlot: 0
+  IsDragged: 0
   Slot: {fileID: 114294785306321664}
+  _inventoryScreen: {fileID: 0}
+  _equipmentScreen: {fileID: 0}
 --- !u!222 &222542449458770742
 CanvasRenderer:
   m_ObjectHideFlags: 1

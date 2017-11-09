@@ -13,8 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemName: Helmet
   Icon: {fileID: 21300000, guid: db1b1e6257fec654b999354ca4087177, type: 3}
+  ItemPrefab: {fileID: 1415806312069918, guid: fbe8f2d1356f64440a7de1aff4479af1, type: 2}
   TypeOfItem: 1
-  HasStackLimit: 1
   EquipmentSlot: 0
   StrengthModifier: 0
   DexterityModifier: 0

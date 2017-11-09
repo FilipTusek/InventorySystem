@@ -27,8 +27,11 @@ public class PlayerController : MonoBehaviour
         if(instance == null)
         {
             instance = this;
-        }
+        }        
+    }
 
+    private void Start ( )
+    {
         DisableInventoryPanels ();
     }
 

@@ -35,7 +35,7 @@ public class EquipmentManager : MonoBehaviour
 
     public void Equip(Equipment newItem)
     {
-        int slotIndex = (int) newItem.EquipmentSlot;
+        int slotIndex = (int) newItem.EquipmentSlot;        
 
         Equipment oldItem = null;
 

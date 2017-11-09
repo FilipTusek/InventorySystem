@@ -23,6 +23,8 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler
 
     private Image _itemImage;
 
+    private bool _pointerOver = false;
+
     private void Awake ( )
     {
         _inventoryScreen = GameObject.Find ("InventoryPanel");
@@ -61,7 +63,7 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler
             transform.SetParent (_slotTransform);
             transform.localPosition = Vector2.zero;
             _itemImage.raycastTarget = true;
-        }
+        }       
     }
 
     public void DragOrDrop()
@@ -117,8 +119,22 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    public void EquipItem()
+    {
+        _equipmentManager.Equip ((Equipment) Slot.Item);
+        Slot.Item.RemoveFromInventroy ();
+    }
+
     public void OnPointerClick (PointerEventData eventData)
     {
-        DragOrDrop ();
-    }
+        if (eventData.button == PointerEventData.InputButton.Left)
+        {
+            DragOrDrop ();
+        }
+
+        if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            EquipItem ();
+        }
+    }   
 }

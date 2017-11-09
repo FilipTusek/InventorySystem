@@ -6,8 +6,11 @@ using UnityEngine.UI;
 
 public class ItemSlotChecker : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
-    public EquipmentSlotType SlotEquipmentSlot;
+    public enum SlotType { EquipmentSlot, InventorySlot }
+    public SlotType TypeOfSlot;
 
+    public EquipmentSlotType SlotEquipmentSlot;
+    
     public Image SlotImage;    
 
     private DragAndDropManager _dragAndDropManager;    
@@ -20,18 +23,27 @@ public class ItemSlotChecker : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     public void OnPointerEnter (PointerEventData eventData)
     {
-        if(_dragAndDropManager.DraggedItemSlot != null && _dragAndDropManager.DraggedItemSlot.Item.TypeOfItem == ItemType.EquipableItem)
+        switch (TypeOfSlot)
         {
-            Equipment item = (Equipment) _dragAndDropManager.DraggedItemSlot.Item;
-
-            if(item.EquipmentSlot == SlotEquipmentSlot)
-            {
-                if (_dragAndDropManager.DraggedItem != null)
+            case SlotType.EquipmentSlot:
+                if (_dragAndDropManager.DraggedItemSlot != null && _dragAndDropManager.DraggedItemSlot.Item.TypeOfItem == ItemType.EquipableItem)
                 {
-                    _dragAndDropManager.DraggedItem.OverAvailableSlot = true;
+                    Equipment item = (Equipment) _dragAndDropManager.DraggedItemSlot.Item;
+
+                    if (item.EquipmentSlot == SlotEquipmentSlot && _dragAndDropManager.DraggedItem != null)
+                    {
+                        _dragAndDropManager.DraggedItem.OverAvailableSlot = true;
+                    }
                 }
-            }
-        }
+                break;
+
+            case SlotType.InventorySlot:
+                if (_dragAndDropManager.DraggedItemSlot != null && _dragAndDropManager.DraggedItem != null)
+                {
+                    _dragAndDropManager.DraggedItem.OverInventorySlot = true;
+                }
+                break;
+        }       
     }
 
     public void OnPointerExit (PointerEventData eventData)
@@ -40,21 +52,19 @@ public class ItemSlotChecker : MonoBehaviour, IPointerEnterHandler, IPointerExit
         {
             Equipment item = (Equipment) _dragAndDropManager.DraggedItemSlot.Item;
 
-            if (item.EquipmentSlot == SlotEquipmentSlot)
-            {
-                if (_dragAndDropManager.DraggedItem != null)
-                {
-                    _dragAndDropManager.DraggedItem.OverAvailableSlot = false;
-                }
+            if (item.EquipmentSlot == SlotEquipmentSlot && _dragAndDropManager.DraggedItem != null)
+            {                
+                _dragAndDropManager.DraggedItem.OverAvailableSlot = false;
+                _dragAndDropManager.DraggedItem.OverInventorySlot = false;
             }
         }
     }
 
     public void OnPointerClick ( PointerEventData eventData )
     {
-        if (_dragAndDropManager.DraggedItemSlot != null)
-        {
-            _dragAndDropManager.DraggedItem.DragOrDrop ();
+        if (_dragAndDropManager.DraggedItemSlot != null && _dragAndDropManager.DraggedItem != null)
+        {            
+            _dragAndDropManager.DraggedItem.DragOrDrop ();           
         }
     }
 }

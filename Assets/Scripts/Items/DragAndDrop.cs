@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 public class DragAndDrop : MonoBehaviour, IPointerClickHandler
 {
     public bool OverAvailableSlot = false;
+    public bool OverInventorySlot = false;
 
     public InventorySlot Slot;
 
@@ -20,6 +21,9 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler
 
     private DragAndDropManager _dragAndDropManager;
     private EquipmentManager _equipmentManager;
+    private Inventory _inventory;
+
+    private Image _itemImage;
     
 
     private void Awake ( )
@@ -32,16 +36,28 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler
     private void Start ( )
     {
         _dragAndDropManager = DragAndDropManager.instance;
-        _slotTransform = transform.parent.parent.transform;
+        _slotTransform = transform.parent.transform;
         Slot = GetComponentInParent<InventorySlot>();
         _equipmentManager = EquipmentManager.instance;
+        _inventory = Inventory.instance;
+        _itemImage = GetComponent<Image> ();
     }
 
     private void Update ( )
     {
-        if(_isDragged)
+        if (_isDragged)
         {
-            transform.position = Input.mousePosition;            
+            if (_inventoryScreen.activeSelf || _equipmentScreen.activeSelf)
+            {
+                transform.position = Input.mousePosition;
+            }
+            else
+            {
+                transform.SetParent (_slotTransform);
+                transform.localPosition = Vector2.zero;
+                _isDragged = false;
+                _itemImage.raycastTarget = true;
+            }
         }
         else
         {
@@ -60,7 +76,7 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler
                 transform.SetParent (transform.root.transform);
                 _dragAndDropManager.DraggedItemSlot = _slotTransform.gameObject.GetComponent<InventorySlot> ();
                 _dragAndDropManager.DraggedItem = this;
-                gameObject.GetComponent<Image> ().raycastTarget = false;                
+                _itemImage.raycastTarget = false;                
             }            
         }
         else
@@ -69,13 +85,26 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler
             {
                 if (!OverAvailableSlot)
                 {
-                    _isDragged = false;
-                    _dragAndDropManager.ItemBeingDragged = false;
-                    transform.SetParent (_slotTransform);
-                    _dragAndDropManager.DraggedItem = null;
-                    gameObject.GetComponent<Image> ().raycastTarget = true;
+                    if (!OverInventorySlot)
+                    {
+                        _isDragged = false;
+                        _dragAndDropManager.ItemBeingDragged = false;
+                        transform.SetParent (_slotTransform);
+                        _dragAndDropManager.DraggedItem = null;
+                        _itemImage.raycastTarget = true;
+                    }
+                    else
+                    {
+                        _isDragged = false;
+                        _dragAndDropManager.ItemBeingDragged = false;
+                        transform.SetParent (_slotTransform);
+                        _dragAndDropManager.DraggedItem = null;
+                        _itemImage.raycastTarget = true;
+                        _inventory.Add (Slot.Item);
+                        Slot.Item.RemoveFromInventroy ();                        
+                    }
                 }
-                else
+                else if (OverAvailableSlot)
                 {
                     _isDragged = false;
                     _dragAndDropManager.ItemBeingDragged = false;                    
@@ -83,8 +112,8 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler
                     Slot.Item.RemoveFromInventroy ();
                     transform.SetParent (_slotTransform);
                     _dragAndDropManager.DraggedItem = null;
-                    gameObject.GetComponent<Image> ().raycastTarget = true;
-                }
+                    _itemImage.raycastTarget = true;
+                }                            
             }
         }
     }

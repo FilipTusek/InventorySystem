@@ -136,7 +136,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1894291867063942}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e0b4ac7c77468048a6c26a7030b42ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 61d3bbf83948e604bbc7de8357531be8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Icon: {fileID: 114481988187545212}
@@ -208,6 +208,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 915584e89f0398c48bfd461e90ef3da1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OverAvailableSlot: 0
+  Slot: {fileID: 0}
 --- !u!222 &222250606984376922
 CanvasRenderer:
   m_ObjectHideFlags: 1

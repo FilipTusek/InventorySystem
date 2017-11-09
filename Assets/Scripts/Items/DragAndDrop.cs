@@ -6,6 +6,10 @@ using UnityEngine.EventSystems;
 
 public class DragAndDrop : MonoBehaviour, IPointerClickHandler
 {
+    public bool OverAvailableSlot = false;
+
+    public InventorySlot Slot;
+
     private Transform _playerTransform;
     private Transform _slotTransform;
 
@@ -14,7 +18,8 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler
 
     private bool _isDragged = false;
 
-    private GameManager _gameManager;
+    private DragAndDropManager _dragAndDropManager;
+    private EquipmentManager _equipmentManager;
     
 
     private void Awake ( )
@@ -26,8 +31,10 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler
 
     private void Start ( )
     {
-        _gameManager = GameManager.instance;
+        _dragAndDropManager = DragAndDropManager.instance;
         _slotTransform = transform.parent.parent.transform;
+        Slot = GetComponentInParent<InventorySlot>();
+        _equipmentManager = EquipmentManager.instance;
     }
 
     private void Update ( )
@@ -44,22 +51,40 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler
 
     public void DragOrDrop()
     {
-        if (!_gameManager.ItemBeingDragged)
+        if (!_dragAndDropManager.ItemBeingDragged)
         {
             if (!_isDragged)
             {
                 _isDragged = true;
-                _gameManager.ItemBeingDragged = true;
+                _dragAndDropManager.ItemBeingDragged = true;
                 transform.SetParent (transform.root.transform);
+                _dragAndDropManager.DraggedItemSlot = _slotTransform.gameObject.GetComponent<InventorySlot> ();
+                _dragAndDropManager.DraggedItem = this;
+                gameObject.GetComponent<Image> ().raycastTarget = false;                
             }            
         }
         else
         {
             if (_isDragged)
             {
-                _isDragged = false;
-                _gameManager.ItemBeingDragged = false;
-                transform.SetParent (_slotTransform);
+                if (!OverAvailableSlot)
+                {
+                    _isDragged = false;
+                    _dragAndDropManager.ItemBeingDragged = false;
+                    transform.SetParent (_slotTransform);
+                    _dragAndDropManager.DraggedItem = null;
+                    gameObject.GetComponent<Image> ().raycastTarget = true;
+                }
+                else
+                {
+                    _isDragged = false;
+                    _dragAndDropManager.ItemBeingDragged = false;                    
+                    _equipmentManager.Equip ((Equipment) Slot.Item);
+                    Slot.Item.RemoveFromInventroy ();
+                    transform.SetParent (_slotTransform);
+                    _dragAndDropManager.DraggedItem = null;
+                    gameObject.GetComponent<Image> ().raycastTarget = true;
+                }
             }
         }
     }

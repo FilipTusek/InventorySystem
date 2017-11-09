@@ -6,7 +6,7 @@ public class InventoryUI : MonoBehaviour
 
     public GameObject InventorySlotGameObject;
 
-    private InventroySlot [] slots; 
+    private InventorySlot [] slots; 
 
     private Inventory _inventory;
 
@@ -22,7 +22,7 @@ public class InventoryUI : MonoBehaviour
         _inventory = Inventory.instance;
         _inventory.OnItemChangedCallback += UpdateUI;
 
-        slots = ItemsParent.GetComponentsInChildren<InventroySlot> ();
+        slots = ItemsParent.GetComponentsInChildren<InventorySlot> ();
     }
 
     private void UpdateUI()
@@ -94,7 +94,7 @@ public class InventoryUI : MonoBehaviour
             for (int i = 0; i < 8; i++)
             {
                 Instantiate (InventorySlotGameObject, ItemsParent);
-                slots = ItemsParent.GetComponentsInChildren<InventroySlot> ();
+                slots = ItemsParent.GetComponentsInChildren<InventorySlot> ();
             }
         }
     }    

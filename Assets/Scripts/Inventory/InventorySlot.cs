@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class InventroySlot : MonoBehaviour
+public class InventorySlot : MonoBehaviour
 {
     public Image Icon;
     public Text StackNumber;

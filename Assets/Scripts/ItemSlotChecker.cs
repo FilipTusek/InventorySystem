@@ -13,12 +13,13 @@ public class ItemSlotChecker : MonoBehaviour, IPointerEnterHandler, IPointerExit
     
     public Image SlotImage;    
 
-    private DragAndDropManager _dragAndDropManager;    
+    private DragAndDropManager _dragAndDropManager;
+    private EquipmentManager _equipmentManager;
 
     private void Start ( )
     {
-        _dragAndDropManager = DragAndDropManager.instance;
-        SlotImage = GetComponentInChildren<Image> ();
+        _dragAndDropManager = DragAndDropManager.instance;        
+        _equipmentManager = EquipmentManager.instance;
     }
 
     public void OnPointerEnter (PointerEventData eventData)
@@ -62,9 +63,23 @@ public class ItemSlotChecker : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     public void OnPointerClick ( PointerEventData eventData )
     {
-        if (_dragAndDropManager.DraggedItemSlot != null && _dragAndDropManager.DraggedItem != null)
-        {            
-            _dragAndDropManager.DraggedItem.DragOrDrop ();           
+        if (eventData.button == PointerEventData.InputButton.Left)
+        {
+            if (_dragAndDropManager.DraggedItemSlot != null && _dragAndDropManager.DraggedItem != null)
+            {
+                _dragAndDropManager.DraggedItem.DragOrDrop ();
+            }
+        }
+        else if(eventData.button == PointerEventData.InputButton.Right)
+        {
+            foreach (Equipment equipment in _equipmentManager.CurrentEquipment)
+            {
+                if(equipment != null && equipment.EquipmentSlot == SlotEquipmentSlot)
+                {
+                    SlotImage.enabled = false;
+                    _equipmentManager.UnequipItem ((int) SlotEquipmentSlot);                    
+                }
+            }
         }
     }
 }

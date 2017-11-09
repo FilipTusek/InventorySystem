@@ -28,7 +28,7 @@ public class DragAndDropManager : MonoBehaviour
     {
         if(Input.GetMouseButtonUp(0))
         {
-            if(DropItem)
+            if(DropItem && DraggedItemSlot.Item != null)
             {
                 Instantiate (DraggedItemSlot.Item.ItemPrefab, _playerTransform.position + Vector3.right, Quaternion.identity);
                 DraggedItemSlot.Item.RemoveFromInventroy ();

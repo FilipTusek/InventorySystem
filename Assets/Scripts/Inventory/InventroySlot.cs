@@ -10,7 +10,7 @@ public class InventroySlot : MonoBehaviour
 
     public Item Item;  
 
-    private void Awake ( )
+    private void Start ( )
     {
         StackableItemData = GetComponent<StackableItemData> ();
     }
@@ -25,10 +25,22 @@ public class InventroySlot : MonoBehaviour
         if(newItem.TypeOfItem == ItemType.StackableItem)
         {
             StackableItem stackableItem = (StackableItem) newItem;
-            
-            StackNumber.enabled = true;
-            StackableItemData.StackLimit = stackableItem.StackLimit;
-            StackableItemData.UpdateStack ();                      
+
+            if (stackableItem.HasStackLimit)
+            {
+                StackableItemData = GetComponent<StackableItemData> ();
+
+                StackNumber.enabled = true;
+                StackableItemData.StackLimit = stackableItem.StackLimit;
+                StackableItemData.UpdateStack ();
+            }
+            else
+            {
+                StackableItemData = GetComponent<StackableItemData> ();
+
+                StackNumber.enabled = true;
+                StackableItemData.UpdateStack ();
+            }
         }
         else
         {

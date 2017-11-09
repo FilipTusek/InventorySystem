@@ -8,7 +8,15 @@ public class StackableItemData : MonoBehaviour
 
     public bool LimitedStackSize = true;
 
-    public Text StackNumber;     
+    public Text StackNumber;
+
+    private void Start ( )
+    {
+        if(!LimitedStackSize)
+        {
+            StackLimit = int.MaxValue;
+        }
+    }
 
     public void UpdateStack()
     {

@@ -42,6 +42,7 @@ public class ItemSlotChecker : MonoBehaviour, IPointerEnterHandler, IPointerExit
                 if (_dragAndDropManager.DraggedItemSlot != null && _dragAndDropManager.DraggedItem != null)
                 {
                     _dragAndDropManager.DraggedItem.OverInventorySlot = true;
+                    _dragAndDropManager.NewSlot = GetComponent<InventorySlot> ();
                 }
                 break;
         }       
@@ -72,12 +73,15 @@ public class ItemSlotChecker : MonoBehaviour, IPointerEnterHandler, IPointerExit
         }
         else if(eventData.button == PointerEventData.InputButton.Right)
         {
-            foreach (Equipment equipment in _equipmentManager.CurrentEquipment)
+            if (TypeOfSlot == SlotType.EquipmentSlot)
             {
-                if(equipment != null && equipment.EquipmentSlot == SlotEquipmentSlot)
+                foreach (Equipment equipment in _equipmentManager.CurrentEquipment)
                 {
-                    SlotImage.enabled = false;
-                    _equipmentManager.UnequipItem ((int) SlotEquipmentSlot);                    
+                    if (equipment != null && equipment.EquipmentSlot == SlotEquipmentSlot)
+                    {
+                        SlotImage.enabled = false;
+                        _equipmentManager.UnequipItem ((int) SlotEquipmentSlot);
+                    }
                 }
             }
         }

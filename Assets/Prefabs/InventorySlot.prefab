@@ -129,6 +129,7 @@ MonoBehaviour:
   StackNumber: {fileID: 114192148435329154}
   StackableItemData: {fileID: 0}
   Item: {fileID: 0}
+  IsEmpty: 1
 --- !u!114 &114420097009759408
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -162,7 +163,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: e76c2480e0b645143b67052b82cc414e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f2bbcce74669b9a4e9ec8421d230da48, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -212,8 +213,6 @@ MonoBehaviour:
   OverInventorySlot: 0
   IsDragged: 0
   Slot: {fileID: 114294785306321664}
-  _inventoryScreen: {fileID: 0}
-  _equipmentScreen: {fileID: 0}
 --- !u!222 &222542449458770742
 CanvasRenderer:
   m_ObjectHideFlags: 1

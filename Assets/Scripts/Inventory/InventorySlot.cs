@@ -8,7 +8,9 @@ public class InventorySlot : MonoBehaviour
 
     public StackableItemData StackableItemData;
 
-    public Item Item;     
+    public Item Item;
+
+    public bool IsEmpty = true;
 
     public void AddItem(Item newItem)
     {
@@ -27,11 +29,13 @@ public class InventorySlot : MonoBehaviour
             {
                 StackNumber.enabled = true;
                 StackableItemData.StackLimit = stackableItem.StackLimit;
+                StackableItemData.LimitedStackSize = stackableItem.HasStackLimit;
                 StackableItemData.UpdateStack ();
             }
             else
             {
                 StackNumber.enabled = true;
+                StackableItemData.LimitedStackSize = stackableItem.HasStackLimit;
                 StackableItemData.UpdateStack ();
             }
         }
@@ -39,6 +43,8 @@ public class InventorySlot : MonoBehaviour
         {
             StackNumber.enabled = false;
         }
+
+        IsEmpty = false;
     } 
     
     public void ClearSlot()
@@ -46,14 +52,15 @@ public class InventorySlot : MonoBehaviour
         Item = null;
 
         Icon.sprite = null;
-        Icon.enabled = false;
-    }
+        Icon.enabled = false;        
+        StackNumber.enabled = false;
+        IsEmpty = true;
 
-    public void DropItem()
-    {
-        Inventory.instance.Remove (Item);
-        //Drop item to the floor
-    }
+        if(StackableItemData != null)
+        {
+            StackableItemData.StackSize = 1;
+        }
+    }  
 
     public void UseItem()
     {

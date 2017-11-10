@@ -10,7 +10,7 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler
     public bool OverInventorySlot = false;
     public bool IsDragged = false;
 
-    public InventorySlot Slot;
+    public InventorySlot Slot;    
    
     private Transform _slotTransform;
 
@@ -73,10 +73,14 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler
             if (!IsDragged)
             {
                 IsDragged = true;
+                Slot.IsEmpty = true;
                 _dragAndDropManager.ItemBeingDragged = true;
+
                 transform.SetParent (transform.root.transform);
+
                 _dragAndDropManager.DraggedItemSlot = _slotTransform.gameObject.GetComponent<InventorySlot> ();
                 _dragAndDropManager.DraggedItem = this;
+
                 _itemImage.raycastTarget = false;                
             }            
         }
@@ -89,31 +93,54 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler
                     if (!OverInventorySlot)
                     {
                         IsDragged = false;
-                        _dragAndDropManager.ItemBeingDragged = false;
+                        _dragAndDropManager.ItemBeingDragged = false;                       
+
                         transform.SetParent (_slotTransform);
-                        _dragAndDropManager.DraggedItem = null;
+                        
                         _itemImage.raycastTarget = true;
+
+                        _dragAndDropManager.DraggedItem = null;
                     }
                     else
                     {
                         IsDragged = false;
                         _dragAndDropManager.ItemBeingDragged = false;
                         transform.SetParent (_slotTransform);
-                        _dragAndDropManager.DraggedItem = null;
+                        
                         _itemImage.raycastTarget = true;
-                        _inventory.Add (Slot.Item);
-                        Slot.Item.RemoveFromInventroy ();                        
+
+                        _dragAndDropManager.NewSlot.AddItem (_dragAndDropManager.DraggedItemSlot.Item);
+
+                        if (_dragAndDropManager.NewSlot.StackableItemData != null && Slot.StackableItemData != null)
+                        {
+                            _dragAndDropManager.NewSlot.StackableItemData.StackSize = Slot.StackableItemData.StackSize;
+                            _dragAndDropManager.NewSlot.StackableItemData.UpdateStack ();
+                        }
+
+                        if (_dragAndDropManager.NewSlot.GetInstanceID() != Slot.GetInstanceID())
+                        {
+                            Slot.ClearSlot ();
+                        }
+
+                        _dragAndDropManager.DraggedItem = null;
+                        _dragAndDropManager.DraggedItemSlot = null;
                     }
                 }
                 else if (OverAvailableSlot)
                 {
                     IsDragged = false;
-                    _dragAndDropManager.ItemBeingDragged = false;                    
+                    _dragAndDropManager.ItemBeingDragged = false;   
+                    
                     _equipmentManager.Equip ((Equipment) Slot.Item);
-                    Slot.Item.RemoveFromInventroy ();
                     transform.SetParent (_slotTransform);
-                    _dragAndDropManager.DraggedItem = null;
+
+                    Slot.Item.RemoveFromInventroy ();
+                    Slot.ClearSlot ();                    
+
                     _itemImage.raycastTarget = true;
+
+                    _dragAndDropManager.DraggedItem = null;
+                    _dragAndDropManager.DraggedItemSlot = null;
                 }                            
             }
         }
@@ -121,8 +148,13 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler
 
     public void EquipItem()
     {
-        _equipmentManager.Equip ((Equipment) Slot.Item);
-        Slot.Item.RemoveFromInventroy ();
+        if (Slot.Item != null)
+        {
+            Equipment item = (Equipment) Slot.Item;
+            Slot.ClearSlot ();
+            _equipmentManager.Equip (item);
+            item.RemoveFromInventroy ();
+        }               
     }
 
     public void OnPointerClick (PointerEventData eventData)
@@ -134,7 +166,10 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler
 
         if (eventData.button == PointerEventData.InputButton.Right)
         {
-            EquipItem ();
+            if (Slot.Item.TypeOfItem == ItemType.EquipableItem)
+            {
+                EquipItem ();
+            }
         }
     }   
 }

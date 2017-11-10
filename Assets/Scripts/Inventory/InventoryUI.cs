@@ -10,7 +10,12 @@ public class InventoryUI : MonoBehaviour
 
     private Inventory _inventory;
 
+    private DragAndDropManager _dragAndDropManager;
+
     private bool _stacked = false;
+    private bool _itemAdded = false;
+
+    private int _inventoryLength = 0;
 
     private void Start ( )
     {
@@ -22,80 +27,157 @@ public class InventoryUI : MonoBehaviour
         _inventory = Inventory.instance;
         _inventory.OnItemChangedCallback += UpdateUI;
 
+        _dragAndDropManager = DragAndDropManager.instance;
+
         slots = ItemsParent.GetComponentsInChildren<InventorySlot> ();
     }
 
     private void UpdateUI()
     {
-        for (int i = 0; i < slots.Length; i++)
+        if (_inventory.Items.Count > slots.Length)
         {
-            if(i < _inventory.Items.Count)
+            for (int i = 0; i < 8; i++)
             {
-                if(_inventory.Items[_inventory.Items.Count - 1].TypeOfItem == ItemType.StackableItem)
+                Instantiate (InventorySlotGameObject, ItemsParent);                
+                slots = ItemsParent.GetComponentsInChildren<InventorySlot> ();
+            }
+        }
+
+        //if (_inventory.Items.Count >= 32)
+        //{
+        //    if (_inventory.Items.Count <= slots.Length - 8)
+        //    {
+        //        for (int i = 0; i < 8; i++)
+        //        {
+        //            Destroy (slots [slots.Length - (i + 1)].gameObject);                                          
+        //        }                
+        //    }
+        //}
+
+        _itemAdded = false;
+
+        if (_inventoryLength < _inventory.Items.Count)
+        {
+            for (int i = 0; i < slots.Length; i++)
+            {
+                Item item = _inventory.Items [_inventory.Items.Count - 1];
+
+                if (item.TypeOfItem == ItemType.EquipableItem)
                 {
-                    if (_inventory.Items [i].TypeOfItem == ItemType.StackableItem)
+                    if (slots [i].IsEmpty && !_itemAdded)
                     {
-                        StackableItem stackableItem = (StackableItem) _inventory.Items [i];                        
-
-                        if (slots [i].Item != null && slots [i].Item.ItemName == _inventory.Items [_inventory.Items.Count - 1].ItemName)
+                        slots [i].AddItem (item);
+                        _itemAdded = true;
+                    }
+                }
+                else if (item.TypeOfItem == ItemType.StackableItem)
+                {
+                    if (!_itemAdded)
+                    {                        
+                        if (slots [i].Item != null)  
                         {
-                            slots [i].StackableItemData.LimitedStackSize = stackableItem.HasStackLimit;
-
-                            if (slots [i].StackableItemData.LimitedStackSize)
+                            if (slots [i].Item.ItemName == item.ItemName)
                             {
-                                if (slots [i].StackableItemData.StackSize < slots [i].StackableItemData.StackLimit)
+                                if (slots [i].StackableItemData.LimitedStackSize && slots[i].StackableItemData.StackSize < slots [i].StackableItemData.StackLimit)
                                 {
                                     if (!_stacked)
                                     {
                                         slots [i].StackableItemData.StackSize++;
                                         slots [i].StackableItemData.UpdateStack ();
-
-                                        _inventory.Items.RemoveAt (_inventory.Items.Count - 1);
+                                        _inventory.Items.Remove (item);
+                                        _itemAdded = true;
                                         _stacked = true;
                                     }
                                 }
-                                else
+                                else if(!slots [i].StackableItemData.LimitedStackSize)
                                 {
-                                    slots [i].AddItem (_inventory.Items [i]);
-                                }
-                            }
-                            else
-                            {
-                                if (!_stacked)
-                                {
-                                    slots [i].StackableItemData.StackSize++;
-                                    slots [i].StackableItemData.UpdateStack ();
-
-                                    _inventory.Items.RemoveAt (_inventory.Items.Count - 1);
-                                    _stacked = true;
-                                }
-                            }
+                                    if(!_stacked)
+                                    {
+                                        slots [i].StackableItemData.StackSize++;
+                                        slots [i].StackableItemData.UpdateStack ();
+                                        _inventory.Items.Remove (item);
+                                        _itemAdded = true;
+                                        _stacked = true;
+                                    }
+                                }                                
+                            }                            
                         }
                         else
                         {
-                            slots [i].AddItem (_inventory.Items [i]);
+                            if (!_itemAdded)
+                            {
+                                slots [i].AddItem (item);                               
+                                _itemAdded = true;
+                            }
                         }
                     }
                 }
-                else
-                {
-                    slots [i].AddItem (_inventory.Items [i]);
-                }                
             }
-            else
-            {
-                slots [i].ClearSlot ();
-            }
-        }
-        _stacked = false;
+        }       
 
-        if (_inventory.Items.Count > slots.Length)
-        {
-            for (int i = 0; i < 8; i++)
-            {
-                Instantiate (InventorySlotGameObject, ItemsParent);
-                slots = ItemsParent.GetComponentsInChildren<InventorySlot> ();
-            }
-        }
+        _inventoryLength = _inventory.Items.Count;
+        _stacked = false;        
+
+        //for (int i = 0; i < slots.Length; i++)
+        //{
+        //    if(i < _inventory.Items.Count)
+        //    {
+        //        if(_inventory.Items[_inventory.Items.Count - 1].TypeOfItem == ItemType.StackableItem)
+        //        {
+        //            if (_inventory.Items [i].TypeOfItem == ItemType.StackableItem)
+        //            {
+        //                StackableItem stackableItem = (StackableItem) _inventory.Items [i];                        
+
+        //                if (slots [i].Item != null && slots [i].Item.ItemName == _inventory.Items [_inventory.Items.Count - 1].ItemName)
+        //                {
+        //                    slots [i].StackableItemData.LimitedStackSize = stackableItem.HasStackLimit;
+
+        //                    if (slots [i].StackableItemData.LimitedStackSize)
+        //                    {
+        //                        if (slots [i].StackableItemData.StackSize < slots [i].StackableItemData.StackLimit)
+        //                        {
+        //                            if (!_stacked)
+        //                            {
+        //                                slots [i].StackableItemData.StackSize++;
+        //                                slots [i].StackableItemData.UpdateStack ();
+
+        //                                _inventory.Items.RemoveAt (_inventory.Items.Count - 1);
+        //                                _stacked = true;
+        //                            }
+        //                        }
+        //                        else
+        //                        {
+        //                            slots [i].AddItem (_inventory.Items [i]);
+        //                        }
+        //                    }
+        //                    else
+        //                    {
+        //                        if (!_stacked)
+        //                        {
+        //                            slots [i].StackableItemData.StackSize++;
+        //                            slots [i].StackableItemData.UpdateStack ();
+
+        //                            _inventory.Items.RemoveAt (_inventory.Items.Count - 1);
+        //                            _stacked = true;
+        //                        }
+        //                    }
+        //                }
+        //                else
+        //                {
+        //                    slots [i].AddItem (_inventory.Items [i]);
+        //                }
+        //            }
+        //        }
+        //        else
+        //        {
+        //            slots [i].AddItem (_inventory.Items [i]);
+        //        }                
+        //    }
+        //    else
+        //    {
+        //        slots [i].ClearSlot ();
+        //    }
+        //}
+        //_stacked = false;         
     }    
 }

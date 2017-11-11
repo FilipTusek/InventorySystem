@@ -7,7 +7,7 @@ public class DragAndDropManager : MonoBehaviour
     public static DragAndDropManager instance;
 
     public bool ItemBeingDragged = false;
-    public bool DropItem = false;
+    public bool Drop = false;
 
     public InventorySlot DraggedItemSlot;
     public InventorySlot NewSlot;
@@ -27,38 +27,43 @@ public class DragAndDropManager : MonoBehaviour
 
     private void Update ( )
     {       
-        if(Input.GetMouseButtonUp (0) && DraggedItemSlot != null && DraggedItemSlot.Item != null && DropItem)
+        if(Input.GetMouseButtonUp (0) && DraggedItemSlot != null && DraggedItemSlot.Item != null && Drop)
         {
-            if (DraggedItem.Slot.Item.TypeOfItem == ItemType.EquipableItem)
-            {
-                Instantiate (DraggedItemSlot.Item.ItemPrefab, _playerTransform.position + Vector3.right, Quaternion.identity);
-
-                DraggedItemSlot.Item.RemoveFromInventroy ();
-                DraggedItemSlot.ClearSlot ();
-
-                ItemBeingDragged = false;
-                DraggedItem.IsDragged = false;
-
-                DraggedItem = null;
-                DraggedItemSlot = null;
-            }
-            else if(DraggedItem.Slot.Item.TypeOfItem == ItemType.StackableItem)
-            {
-                for (int i = 0; i < DraggedItem.Slot.StackableItemData.StackSize; i++)
-                {
-                    Instantiate (DraggedItemSlot.Item.ItemPrefab, _playerTransform.position + Vector3.right, Quaternion.identity);                       
-                }
-
-                DraggedItemSlot.Item.RemoveFromInventroy ();
-                DraggedItemSlot.ClearSlot ();
-
-                ItemBeingDragged = false;
-                DraggedItem.IsDragged = false;
-
-                DraggedItem = null;
-                DraggedItemSlot = null;
-            }
+            DropItem ();
         }           
         
+    }
+
+    public void DropItem()
+    {
+        if (DraggedItem.Slot.Item.TypeOfItem == ItemType.EquipableItem)
+        {
+            Instantiate (DraggedItemSlot.Item.ItemPrefab, _playerTransform.position + Vector3.right, Quaternion.identity);
+
+            DraggedItemSlot.Item.RemoveFromInventroy ();
+            DraggedItemSlot.ClearSlot ();
+
+            ItemBeingDragged = false;
+            DraggedItem.IsDragged = false;
+
+            DraggedItem = null;
+            DraggedItemSlot = null;
+        }
+        else if (DraggedItem.Slot.Item.TypeOfItem == ItemType.StackableItem)
+        {
+            for (int i = 0; i < DraggedItem.Slot.StackableItemData.StackSize; i++)
+            {
+                Instantiate (DraggedItemSlot.Item.ItemPrefab, _playerTransform.position + Vector3.right, Quaternion.identity);
+            }
+
+            DraggedItemSlot.Item.RemoveFromInventroy ();
+            DraggedItemSlot.ClearSlot ();
+
+            ItemBeingDragged = false;
+            DraggedItem.IsDragged = false;
+
+            DraggedItem = null;
+            DraggedItemSlot = null;
+        }
     }
 }

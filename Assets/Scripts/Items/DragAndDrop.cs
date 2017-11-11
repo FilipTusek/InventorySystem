@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class DragAndDrop : MonoBehaviour, IPointerClickHandler
+public class DragAndDrop : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public bool OverAvailableSlot = false;
     public bool OverInventorySlot = false;
@@ -63,7 +63,14 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler
             transform.SetParent (_slotTransform);
             transform.localPosition = Vector2.zero;
             _itemImage.raycastTarget = true;
-        }       
+        }  
+        
+        if(Input.GetMouseButton(0) && Input.GetKeyDown(KeyCode.T) && _pointerOver)
+        {
+            _dragAndDropManager.DraggedItemSlot = _slotTransform.gameObject.GetComponent<InventorySlot> ();
+            _dragAndDropManager.DraggedItem = this;
+            _dragAndDropManager.DropItem ();
+        }
     }
 
     public void DragOrDrop()
@@ -160,7 +167,7 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick (PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)
-        {
+        {            
             DragOrDrop ();
         }
 
@@ -171,5 +178,15 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler
                 EquipItem ();
             }
         }
-    }   
+    } 
+    
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        _pointerOver = true;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        _pointerOver = false;
+    }
 }

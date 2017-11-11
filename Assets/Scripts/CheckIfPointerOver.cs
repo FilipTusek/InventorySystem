@@ -14,11 +14,11 @@ public class CheckIfPointerOver : MonoBehaviour, IPointerEnterHandler, IPointerE
     
     public void OnPointerEnter (PointerEventData eventData)
     {
-        _dragAndDropManager.DropItem = false;
+        _dragAndDropManager.Drop = false;
     }
 
     public void OnPointerExit (PointerEventData eventData)
     {
-        _dragAndDropManager.DropItem = true;
+        _dragAndDropManager.Drop = true;
     }
 }

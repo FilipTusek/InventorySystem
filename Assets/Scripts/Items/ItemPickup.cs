@@ -1,15 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ItemPickup : MonoBehaviour, IPointerClickHandler
+public class ItemPickup : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public Item MyItem;
 
     public float PickupRadius = 1.0f;
 
     public float DistanceToPlayer;
+
+    public Color HighlitedColor;
+
+     private SpriteRenderer _spriteRenderer;
 
     private Transform _player;
     private PlayerController _playerController;
@@ -26,6 +28,7 @@ public class ItemPickup : MonoBehaviour, IPointerClickHandler
         _playerController = PlayerController.instance;
         _inventory = Inventory.instance;
         _equipmentManager = EquipmentManager.instance;
+        _spriteRenderer = GetComponent<SpriteRenderer> ();
     }
 
     private void Update ( )
@@ -79,5 +82,15 @@ public class ItemPickup : MonoBehaviour, IPointerClickHandler
                 PickUp ();
             }
         }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        _spriteRenderer.color = HighlitedColor;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        _spriteRenderer.color = Color.white;
     }
 }

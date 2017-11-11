@@ -8,12 +8,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0069ad982f8547c4c8094c3a72b1a4d7, type: 3}
-  m_Name: PoisonPotion
+  m_Script: {fileID: 11500000, guid: e4c23742a1055254a91af83d8d88dc1c, type: 3}
+  m_Name: PoisonPotioin
   m_EditorClassIdentifier: 
   ItemName: Poison Potion
   Icon: {fileID: 21300000, guid: 043a32c0496886642a7f6befa5a95715, type: 3}
   ItemPrefab: {fileID: 1121082822013820, guid: 3beef948371a6fa4e97dea25c8299635, type: 2}
+  ItemCategory: 4
   TypeOfItem: 2
   HasStackLimit: 0
   StackLimit: 0
+  ItemDescription: Deals 15 damage when consumed.
+  TypeOfUsableItem: 2
+  EffectAmount: 15

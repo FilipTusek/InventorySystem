@@ -2,6 +2,8 @@
 
 public class PlayerStats : MonoBehaviour
 {
+    public static PlayerStats instance;
+
     public int MaxHealth = 100;
     public int CurrentHealth { get; private set; }
 
@@ -15,6 +17,11 @@ public class PlayerStats : MonoBehaviour
 
     private void Awake ( )
     {
+        if(instance == null)
+        {
+            instance = this;
+        }
+
         CurrentHealth = MaxHealth;
         CurrentMana = MaxMana;
     }

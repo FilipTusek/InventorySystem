@@ -37,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1410316974531218}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.927, y: 1.166, z: 0}
+  m_LocalPosition: {x: -2.1619248, y: -0.06947589, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -102,6 +102,7 @@ MonoBehaviour:
   MyItem: {fileID: 11400000, guid: f56d3213f7b71cc48b623f74256ae245, type: 2}
   PickupRadius: 1
   DistanceToPlayer: 0
+  HighlitedColor: {r: 0.78676474, g: 0, b: 0, a: 1}
 --- !u!212 &212290905791514360
 SpriteRenderer:
   m_ObjectHideFlags: 1

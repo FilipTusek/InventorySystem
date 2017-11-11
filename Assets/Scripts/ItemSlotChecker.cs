@@ -16,10 +16,35 @@ public class ItemSlotChecker : MonoBehaviour, IPointerEnterHandler, IPointerExit
     private DragAndDropManager _dragAndDropManager;
     private EquipmentManager _equipmentManager;
 
+    private bool _pointerOver = false;
+
     private void Start ( )
     {
         _dragAndDropManager = DragAndDropManager.instance;        
         _equipmentManager = EquipmentManager.instance;
+    }
+
+    private void Update ( )
+    {
+        if(_pointerOver && Input.GetKeyDown(KeyCode.U))
+        {
+            UnequipItem ();
+        }
+    }
+
+    private void UnequipItem()
+    {
+        if (TypeOfSlot == SlotType.EquipmentSlot)
+        {
+            foreach (Equipment equipment in _equipmentManager.CurrentEquipment)
+            {
+                if (equipment != null && equipment.EquipmentSlot == SlotEquipmentSlot)
+                {
+                    SlotImage.enabled = false;
+                    _equipmentManager.UnequipItem ((int) SlotEquipmentSlot);
+                }
+            }
+        }
     }
 
     public void OnPointerEnter (PointerEventData eventData)
@@ -45,7 +70,8 @@ public class ItemSlotChecker : MonoBehaviour, IPointerEnterHandler, IPointerExit
                     _dragAndDropManager.NewSlot = GetComponent<InventorySlot> ();
                 }
                 break;
-        }       
+        }
+        _pointerOver = true;
     }
 
     public void OnPointerExit (PointerEventData eventData)
@@ -60,6 +86,7 @@ public class ItemSlotChecker : MonoBehaviour, IPointerEnterHandler, IPointerExit
                 _dragAndDropManager.DraggedItem.OverInventorySlot = false;
             }
         }
+        _pointerOver = false;
     }
 
     public void OnPointerClick ( PointerEventData eventData )
@@ -73,17 +100,7 @@ public class ItemSlotChecker : MonoBehaviour, IPointerEnterHandler, IPointerExit
         }
         else if(eventData.button == PointerEventData.InputButton.Right)
         {
-            if (TypeOfSlot == SlotType.EquipmentSlot)
-            {
-                foreach (Equipment equipment in _equipmentManager.CurrentEquipment)
-                {
-                    if (equipment != null && equipment.EquipmentSlot == SlotEquipmentSlot)
-                    {
-                        SlotImage.enabled = false;
-                        _equipmentManager.UnequipItem ((int) SlotEquipmentSlot);
-                    }
-                }
-            }
+            UnequipItem ();
         }
     }
 }

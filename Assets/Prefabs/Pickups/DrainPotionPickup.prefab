@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 50660996367470440}
   - component: {fileID: 61937492017464136}
   m_Layer: 0
-  m_Name: KarababovsPotionOfMinorDrainingPickup
+  m_Name: DrainPotionPickup
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,9 +99,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: addcf419492b70044a45f5cd4951e7f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MyItem: {fileID: 11400000, guid: 712bbe8abe1bc244886080af5ff89908, type: 2}
+  MyItem: {fileID: 11400000, guid: d5e414d306d3d7f4894e652b9f7fcc28, type: 2}
   PickupRadius: 1
   DistanceToPlayer: 0
+  HighlitedColor: {r: 0.78676474, g: 0, b: 0, a: 1}
 --- !u!212 &212574024155099650
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -9,6 +9,8 @@ public class StackableItem : Item
 
     public int StackLimit = 5;
 
+    public string ItemDescription;
+
     private void Awake ( )
     {
         TypeOfItem = ItemType.StackableItem;

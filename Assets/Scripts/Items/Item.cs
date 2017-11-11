@@ -10,6 +10,9 @@ public class Item : ScriptableObject
     public Sprite Icon = null;
 
     public GameObject ItemPrefab;
+
+    public enum CategoryType { Weapon, Shield, Helmet, Boots, Potion, Misc }
+    public CategoryType ItemCategory;
         
     public ItemType TypeOfItem;    
 

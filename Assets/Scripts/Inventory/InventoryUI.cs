@@ -14,6 +14,8 @@ public class InventoryUI : MonoBehaviour
     {
         public GameObject InventoryScreen;
         public GameObject EquipmentScreen;
+        public GameObject EquipmentTooltipScreen;
+        public GameObject ConsumableTooltipScreen;
 
         public GameObject InventroyToggleButton;
         public GameObject EquipmentToggleButton;
@@ -61,6 +63,8 @@ public class InventoryUI : MonoBehaviour
     {
         Panel.InventoryScreen.SetActive (false);
         Panel.EquipmentScreen.SetActive (false);
+        Panel.EquipmentTooltipScreen.SetActive (false);
+        Panel.ConsumableTooltipScreen.SetActive (false);
     }
 
     private void UpdateUI()

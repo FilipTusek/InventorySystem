@@ -9,14 +9,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ade6d6c9cb0e544799190e4ef624d03, type: 3}
-  m_Name: Boots
+  m_Name: MetalHelmet
   m_EditorClassIdentifier: 
-  ItemName: Boots
-  Icon: {fileID: 21300000, guid: 4265166bf2d49c740be2455ea0c06405, type: 3}
-  ItemPrefab: {fileID: 1410316974531218, guid: 12b608d2fbd6d794bb9a07cfb930cbf1, type: 2}
+  ItemName: Metal Helmet
+  Icon: {fileID: 21300000, guid: db1b1e6257fec654b999354ca4087177, type: 3}
+  ItemPrefab: {fileID: 1415806312069918, guid: fbe8f2d1356f64440a7de1aff4479af1, type: 2}
+  ItemCategory: 2
   TypeOfItem: 1
-  EquipmentSlot: 3
+  EquipmentSlot: 0
   StrengthModifier: 0
   DexterityModifier: 0
-  AgilityModifier: 5
-  InteligenceModifier: 0
+  AgilityModifier: 0
+  InteligenceModifier: 5

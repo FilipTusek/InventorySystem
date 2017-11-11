@@ -11,37 +11,54 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
     public bool IsDragged = false;
 
     public InventorySlot Slot;    
-   
+
     private Transform _slotTransform;
 
     private GameObject _inventoryScreen;
-    private GameObject _equipmentScreen;      
+    private GameObject _equipmentScreen;
+    private GameObject _equipmentTooltipScreen;
+    private GameObject _consumableTooltipScreen;
 
     private DragAndDropManager _dragAndDropManager;
     private EquipmentManager _equipmentManager;
     private Inventory _inventory;
+    private InventoryUI _inventoryUI;
+    private Tooltip _equipmentTooltip;
+    private Tooltip _consumableTooltip;
 
     private Image _itemImage;
 
-    private bool _pointerOver = false;
-
-    private void Awake ( )
-    {
-        _equipmentScreen = GameObject.Find ("EquipmentPanel");
-        _inventoryScreen = GameObject.Find ("InventoryPanel");        
-    }
+    private bool _pointerOver = false;  
 
     private void Start ( )
-    {       
+    {
         _dragAndDropManager = DragAndDropManager.instance;
-        _slotTransform = transform.parent.transform;
-        Slot = GetComponentInParent<InventorySlot>();
         _equipmentManager = EquipmentManager.instance;
         _inventory = Inventory.instance;
+        _inventoryUI = InventoryUI.instance;
+        
+        Slot = GetComponentInParent<InventorySlot> ();       
         _itemImage = GetComponent<Image> ();
+
+        _slotTransform = transform.parent.transform;
+
+        _inventoryScreen = _inventoryUI.Panel.InventoryScreen;
+        _equipmentScreen = _inventoryUI.Panel.EquipmentScreen;
+        _equipmentTooltipScreen = _inventoryUI.Panel.EquipmentTooltipScreen;
+        _consumableTooltipScreen = _inventoryUI.Panel.ConsumableTooltipScreen;
+
+        _equipmentTooltip = _equipmentTooltipScreen.GetComponent<Tooltip> ();
+        _consumableTooltip = _consumableTooltipScreen.GetComponent<Tooltip> ();
     }
 
     private void Update ( )
+    {
+        SetItemPosition ();
+        CheckForItemDrop ();
+        CheckForEquip ();
+    }
+
+    private void SetItemPosition ( )
     {
         if (IsDragged)
         {
@@ -63,14 +80,71 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
             transform.SetParent (_slotTransform);
             transform.localPosition = Vector2.zero;
             _itemImage.raycastTarget = true;
-        }  
-        
-        if(Input.GetMouseButton(0) && Input.GetKeyDown(KeyCode.T) && _pointerOver)
+        }
+    }
+
+    private void CheckForItemDrop ( )
+    {
+        if (Input.GetMouseButton (0) && Input.GetKeyDown (KeyCode.T) && _pointerOver)
         {
             _dragAndDropManager.DraggedItemSlot = _slotTransform.gameObject.GetComponent<InventorySlot> ();
             _dragAndDropManager.DraggedItem = this;
             _dragAndDropManager.DropItem ();
         }
+
+        if (_pointerOver && Input.GetKeyDown (KeyCode.Z))
+        {
+            _dragAndDropManager.DraggedItemSlot = _slotTransform.gameObject.GetComponent<InventorySlot> ();
+            _dragAndDropManager.DraggedItem = this;
+            _dragAndDropManager.DropItem ();
+        }
+    }
+
+    private void CheckForEquip ( )
+    {
+        if (_pointerOver && Input.GetKeyDown (KeyCode.Q))
+        {
+            EquipItem ();
+        }
+    }
+
+    private void ShowTooltip ( )
+    {
+        if (_dragAndDropManager.DraggedItem == null)
+        {
+            if (Slot.Item.TypeOfItem == ItemType.EquipableItem)
+            {
+                _equipmentTooltip.ItemName.text = Slot.Item.ItemName;
+                _equipmentTooltip.TypeOfItem.text = Slot.Item.ItemCategory.ToString ();
+                _equipmentTooltip.ItemIcon.sprite = Slot.Item.Icon;
+
+                Equipment equipment = (Equipment) Slot.Item;
+
+                _equipmentTooltip.EquipTooltip.Strength.text = "Strength: " + equipment.StrengthModifier.ToString ();
+                _equipmentTooltip.EquipTooltip.Dexterity.text = "Dexterity: " + equipment.DexterityModifier.ToString ();
+                _equipmentTooltip.EquipTooltip.Agility.text = "Agility: " + equipment.AgilityModifier.ToString ();
+                _equipmentTooltip.EquipTooltip.Inteligence.text = "Inteligence: " + equipment.InteligenceModifier.ToString ();
+
+                _equipmentTooltipScreen.SetActive (true);
+            }
+            else if (Slot.Item.TypeOfItem == ItemType.StackableItem)
+            {
+                _consumableTooltip.ItemName.text = Slot.Item.ItemName;
+                _consumableTooltip.TypeOfItem.text = Slot.Item.ItemCategory.ToString ();
+                _consumableTooltip.ItemIcon.sprite = Slot.Item.Icon;
+
+                StackableItem consumable = (StackableItem) Slot.Item;
+
+                _consumableTooltip.ConsumTooltip.Description.text = consumable.ItemDescription;
+                _consumableTooltipScreen.SetActive (true);
+            }
+        }
+    }
+
+    private void HideTooltip ( )
+    {
+        _equipmentTooltipScreen.SetActive (false);
+        _consumableTooltipScreen.SetActive (false);
     }
 
     public void DragOrDrop()
@@ -164,6 +238,11 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
         }               
     }
 
+    private void UseItem()
+    {
+        Slot.Item.Use ();
+    }
+
     public void OnPointerClick (PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)
@@ -178,15 +257,38 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
                 EquipItem ();
             }
         }
+
+        if(eventData.button == PointerEventData.InputButton.Middle)
+        {
+            if (Slot.Item.ItemCategory == Item.CategoryType.Potion)
+            {
+                UsableItem usable = (UsableItem) Slot.Item;
+
+                usable.Use ();
+
+                if(Slot.StackableItemData.StackSize > 1)
+                {
+                    Slot.StackableItemData.StackSize--;
+                    Slot.StackableItemData.UpdateStack ();
+                }
+                else
+                {
+                    Slot.Item.RemoveFromInventroy ();
+                    Slot.ClearSlot ();
+                }
+            }
+        }
     } 
     
     public void OnPointerEnter(PointerEventData eventData)
     {
         _pointerOver = true;
+        ShowTooltip ();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         _pointerOver = false;
+        HideTooltip ();
     }
 }

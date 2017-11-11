@@ -8,12 +8,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0069ad982f8547c4c8094c3a72b1a4d7, type: 3}
-  m_Name: KarababovsPotionOfMinorDraining
+  m_Script: {fileID: 11500000, guid: e4c23742a1055254a91af83d8d88dc1c, type: 3}
+  m_Name: DrainPotion
   m_EditorClassIdentifier: 
-  ItemName: Karababovs Potion Of Minor Draining
+  ItemName: Drain Potion
   Icon: {fileID: 21300000, guid: 9f89ab123bec686459026f99a6ce513e, type: 3}
   ItemPrefab: {fileID: 1111281745269744, guid: b1951fe0ec5fdd9419e29e65b8c32007, type: 2}
+  ItemCategory: 4
   TypeOfItem: 2
   HasStackLimit: 0
   StackLimit: 0
+  ItemDescription: Drains 10 MP when consumed
+  TypeOfUsableItem: 3
+  EffectAmount: 10

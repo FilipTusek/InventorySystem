@@ -8,12 +8,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0069ad982f8547c4c8094c3a72b1a4d7, type: 3}
+  m_Script: {fileID: 11500000, guid: e4c23742a1055254a91af83d8d88dc1c, type: 3}
   m_Name: HealthPotion
   m_EditorClassIdentifier: 
   ItemName: Health Potion
   Icon: {fileID: 21300000, guid: 71c2c594c63a03c49b05f6ee037a52c8, type: 3}
   ItemPrefab: {fileID: 1958599018485530, guid: 0be4ab90d72976e48a32af00701815a8, type: 2}
+  ItemCategory: 4
   TypeOfItem: 2
   HasStackLimit: 1
   StackLimit: 5
+  ItemDescription: Restores 20 HP when consumed.
+  TypeOfUsableItem: 0
+  EffectAmount: 20

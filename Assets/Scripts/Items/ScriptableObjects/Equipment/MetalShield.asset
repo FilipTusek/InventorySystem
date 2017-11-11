@@ -9,14 +9,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ade6d6c9cb0e544799190e4ef624d03, type: 3}
-  m_Name: Helmet
+  m_Name: MetalShield
   m_EditorClassIdentifier: 
-  ItemName: Helmet
-  Icon: {fileID: 21300000, guid: db1b1e6257fec654b999354ca4087177, type: 3}
-  ItemPrefab: {fileID: 1415806312069918, guid: fbe8f2d1356f64440a7de1aff4479af1, type: 2}
+  ItemName: Metal Shield
+  Icon: {fileID: 21300000, guid: 85fdd55f55047af4b820240298cb41d6, type: 3}
+  ItemPrefab: {fileID: 1322447401785362, guid: fc970eb2c8098bb4a8c2963c37117a71, type: 2}
+  ItemCategory: 1
   TypeOfItem: 1
-  EquipmentSlot: 0
-  StrengthModifier: 0
+  EquipmentSlot: 2
+  StrengthModifier: 3
   DexterityModifier: 0
   AgilityModifier: 0
-  InteligenceModifier: 5
+  InteligenceModifier: 0

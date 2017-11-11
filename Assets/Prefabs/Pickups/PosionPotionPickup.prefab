@@ -99,9 +99,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: addcf419492b70044a45f5cd4951e7f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MyItem: {fileID: 11400000, guid: 76b1291616fd44a498e3eef8cdc7344c, type: 2}
+  MyItem: {fileID: 11400000, guid: b90cc1e4c1527aa49be2c10703621e35, type: 2}
   PickupRadius: 1
   DistanceToPlayer: 0
+  HighlitedColor: {r: 0.78676474, g: 0, b: 0, a: 1}
 --- !u!212 &212078407970187644
 SpriteRenderer:
   m_ObjectHideFlags: 1

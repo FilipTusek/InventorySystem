@@ -9,14 +9,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ade6d6c9cb0e544799190e4ef624d03, type: 3}
-  m_Name: Shield
+  m_Name: LeatherBoots
   m_EditorClassIdentifier: 
-  ItemName: Shield
-  Icon: {fileID: 21300000, guid: 85fdd55f55047af4b820240298cb41d6, type: 3}
-  ItemPrefab: {fileID: 1322447401785362, guid: fc970eb2c8098bb4a8c2963c37117a71, type: 2}
+  ItemName: Leather Boots
+  Icon: {fileID: 21300000, guid: 4265166bf2d49c740be2455ea0c06405, type: 3}
+  ItemPrefab: {fileID: 1410316974531218, guid: 12b608d2fbd6d794bb9a07cfb930cbf1, type: 2}
+  ItemCategory: 3
   TypeOfItem: 1
-  EquipmentSlot: 2
-  StrengthModifier: 3
+  EquipmentSlot: 3
+  StrengthModifier: 0
   DexterityModifier: 0
-  AgilityModifier: 0
+  AgilityModifier: 5
   InteligenceModifier: 0

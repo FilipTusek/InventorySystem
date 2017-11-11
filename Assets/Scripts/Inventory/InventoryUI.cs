@@ -43,16 +43,17 @@ public class InventoryUI : MonoBehaviour
             }
         }
 
-        //if (_inventory.Items.Count >= 32)
-        //{
-        //    if (_inventory.Items.Count <= slots.Length - 8)
-        //    {
-        //        for (int i = 0; i < 8; i++)
-        //        {
-        //            Destroy (slots [slots.Length - (i + 1)].gameObject);                                          
-        //        }                
-        //    }
-        //}
+        if (_inventory.Items.Count >= 32)
+        {
+            if (_inventory.Items.Count <= slots.Length - 8)
+            {
+                for (int i = 0; i < 8; i++)
+                {
+                    Destroy (slots [slots.Length - (i + 1)].gameObject);                    
+                }
+                System.Array.Resize (ref slots, slots.Length - 8);
+            }            
+        }
 
         _itemAdded = false;
 

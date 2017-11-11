@@ -63,6 +63,8 @@ public class ItemPickup : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
                 break;
 
             case ItemType.PermanentUsageItem:
+                MyItem.Use ();
+                Destroy (gameObject);
                 break;
         }             
     }

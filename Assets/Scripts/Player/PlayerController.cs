@@ -42,6 +42,11 @@ public class PlayerController : MonoBehaviour
             _inventoryUI.Panel.EquipmentScreen.SetActive (!_inventoryUI.Panel.EquipmentScreen.activeSelf);            
         }
 
+        if(Input.GetKeyUp (KeyCode.C))
+        {
+            _inventoryUI.Panel.AttributesScreen.SetActive (!_inventoryUI.Panel.AttributesScreen.activeSelf);
+        }
+
         if(_inventoryUI.Panel.InventoryScreen.activeSelf)
         {
             _inventoryUI.Panel.InventroyToggleButton.SetActive (false);
@@ -58,6 +63,15 @@ public class PlayerController : MonoBehaviour
         else
         {
             _inventoryUI.Panel.EquipmentToggleButton.SetActive (true);
+        }
+
+        if(_inventoryUI.Panel.AttributesScreen.activeSelf)
+        {
+            _inventoryUI.Panel.AttributesToggleButton.SetActive (false);
+        }
+        else
+        {
+            _inventoryUI.Panel.AttributesToggleButton.SetActive (true);
         }
     }    
 

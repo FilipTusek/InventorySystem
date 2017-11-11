@@ -15,6 +15,8 @@ public class PlayerStats : MonoBehaviour
     public Stat Agility;
     public Stat Inteligence;
 
+    private AttributesUI _attributesUI;
+
     private void Awake ( )
     {
         if(instance == null)
@@ -28,6 +30,8 @@ public class PlayerStats : MonoBehaviour
 
     private void Start ( )
     {
+        _attributesUI = AttributesUI.instance;
+
         EquipmentManager.instance.OnEquipmentChangedCallback += OnEquipmentChanged;
     }
 
@@ -61,6 +65,8 @@ public class PlayerStats : MonoBehaviour
             Dexterity.AddModifier (newItem.DexterityModifier);
             Agility.AddModifier (newItem.AgilityModifier);
             Inteligence.AddModifier (newItem.InteligenceModifier);
+
+            _attributesUI.UpdateAttributes ();
         }
 
         if(oldItem != null)
@@ -69,6 +75,8 @@ public class PlayerStats : MonoBehaviour
             Dexterity.RemoveModifier (oldItem.DexterityModifier);
             Agility.RemoveModifier (oldItem.AgilityModifier);
             Inteligence.RemoveModifier (oldItem.InteligenceModifier);
+
+            _attributesUI.UpdateAttributes ();
         }
     }
 }

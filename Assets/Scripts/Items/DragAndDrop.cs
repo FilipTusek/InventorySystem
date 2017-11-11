@@ -27,8 +27,8 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler
 
     private void Awake ( )
     {
-        _inventoryScreen = GameObject.Find ("InventoryPanel");
         _equipmentScreen = GameObject.Find ("EquipmentPanel");
+        _inventoryScreen = GameObject.Find ("InventoryPanel");        
     }
 
     private void Start ( )

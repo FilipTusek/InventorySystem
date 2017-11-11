@@ -555,8 +555,8 @@ GameObject:
   - component: {fileID: 88477134}
   - component: {fileID: 88477133}
   - component: {fileID: 88477132}
-  - component: {fileID: 88477131}
   - component: {fileID: 88477130}
+  - component: {fileID: 88477131}
   - component: {fileID: 88477137}
   m_Layer: 8
   m_Name: Player
@@ -577,11 +577,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PickUpItemOnCollision: 1
-  inventoryPanel:
-    InventoryScreen: {fileID: 1144460917}
-    EquipmentScreen: {fileID: 1702210282}
-    InventroyToggleButton: {fileID: 349503869}
-    EquipmentToggleButton: {fileID: 33424511}
 --- !u!114 &88477131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3541,6 +3536,11 @@ MonoBehaviour:
   ItemsParent: {fileID: 1243489623}
   InventorySlotGameObject: {fileID: 1894291867063942, guid: 01d3e57ca507ee7469a806ebef70f6fc,
     type: 2}
+  Panel:
+    InventoryScreen: {fileID: 1144460917}
+    EquipmentScreen: {fileID: 1702210282}
+    InventroyToggleButton: {fileID: 349503869}
+    EquipmentToggleButton: {fileID: 33424511}
 --- !u!4 &797406048 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4547466419322844, guid: 0be4ab90d72976e48a32af00701815a8,

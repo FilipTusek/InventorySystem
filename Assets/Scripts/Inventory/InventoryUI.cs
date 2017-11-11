@@ -1,10 +1,25 @@
 ﻿using UnityEngine;
+using System;
 
 public class InventoryUI : MonoBehaviour
 {
+    public static InventoryUI instance;
+
     public Transform ItemsParent;
 
     public GameObject InventorySlotGameObject;
+
+    [Serializable]
+    public struct InventoryPanel
+    {
+        public GameObject InventoryScreen;
+        public GameObject EquipmentScreen;
+
+        public GameObject InventroyToggleButton;
+        public GameObject EquipmentToggleButton;
+    }
+
+    public InventoryPanel Panel;
 
     private InventorySlot [] slots; 
 
@@ -16,6 +31,14 @@ public class InventoryUI : MonoBehaviour
     private bool _itemAdded = false;
 
     private int _inventoryLength = 0;
+
+    private void Awake ( )
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+    }
 
     private void Start ( )
     {
@@ -30,33 +53,24 @@ public class InventoryUI : MonoBehaviour
         _dragAndDropManager = DragAndDropManager.instance;
 
         slots = ItemsParent.GetComponentsInChildren<InventorySlot> ();
+
+        DisableInventoryPanels ();
+    }
+
+    public void DisableInventoryPanels ( )
+    {
+        Panel.InventoryScreen.SetActive (false);
+        Panel.EquipmentScreen.SetActive (false);
     }
 
     private void UpdateUI()
     {
-        if (_inventory.Items.Count > slots.Length)
-        {
-            for (int i = 0; i < 8; i++)
-            {
-                Instantiate (InventorySlotGameObject, ItemsParent);                
-                slots = ItemsParent.GetComponentsInChildren<InventorySlot> ();
-            }
-        }
-
-        if (_inventory.Items.Count >= 32)
-        {
-            if (_inventory.Items.Count <= slots.Length - 8)
-            {
-                for (int i = 0; i < 8; i++)
-                {
-                    Destroy (slots [slots.Length - (i + 1)].gameObject);                    
-                }
-                System.Array.Resize (ref slots, slots.Length - 8);
-            }            
-        }
+        AddRowToInventory ();
+        RemoveRowFromInventory ();
 
         _itemAdded = false;
 
+        //Handles item icons and stacks inside inventory UI
         if (_inventoryLength < _inventory.Items.Count)
         {
             for (int i = 0; i < slots.Length; i++)
@@ -86,6 +100,7 @@ public class InventoryUI : MonoBehaviour
                                         slots [i].StackableItemData.StackSize++;
                                         slots [i].StackableItemData.UpdateStack ();
                                         _inventory.Items.Remove (item);
+                                        RemoveRowFromInventory ();
                                         _itemAdded = true;
                                         _stacked = true;
                                     }
@@ -97,6 +112,7 @@ public class InventoryUI : MonoBehaviour
                                         slots [i].StackableItemData.StackSize++;
                                         slots [i].StackableItemData.UpdateStack ();
                                         _inventory.Items.Remove (item);
+                                        RemoveRowFromInventory ();
                                         _itemAdded = true;
                                         _stacked = true;
                                     }
@@ -180,5 +196,32 @@ public class InventoryUI : MonoBehaviour
         //    }
         //}
         //_stacked = false;         
-    }    
+    }  
+    
+    private void AddRowToInventory()
+    {        
+        if (_inventory.Items.Count > slots.Length)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                Instantiate (InventorySlotGameObject, ItemsParent);
+                slots = ItemsParent.GetComponentsInChildren<InventorySlot> ();
+            }
+        }        
+    }
+
+    private void RemoveRowFromInventory()
+    {        
+        if (_inventory.Items.Count >= 32)
+        {
+            if (_inventory.Items.Count <= slots.Length - 8)
+            {
+                for (int i = 0; i < 8; i++)
+                {
+                    Destroy (slots [slots.Length - (i + 1)].gameObject);
+                }
+                System.Array.Resize (ref slots, slots.Length - 8);
+            }
+        }
+    }
 }

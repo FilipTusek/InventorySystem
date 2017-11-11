@@ -10,17 +10,7 @@ public class PlayerController : MonoBehaviour
 
     public bool PickUpItemOnCollision = true;
 
-    [Serializable]
-    public struct InventoryPanel
-    {
-        public GameObject InventoryScreen;
-        public GameObject EquipmentScreen;
-
-        public GameObject InventroyToggleButton;
-        public GameObject EquipmentToggleButton;
-    }
-
-    public InventoryPanel inventoryPanel;
+    private InventoryUI _inventoryUI;
 
     private void Awake ( )
     {
@@ -32,7 +22,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start ( )
     {
-        DisableInventoryPanels ();
+        _inventoryUI = InventoryUI.instance;
     }
 
     private void Update ( )
@@ -44,38 +34,32 @@ public class PlayerController : MonoBehaviour
     {
         if(Input.GetKeyUp(KeyCode.I))
         {
-            inventoryPanel.InventoryScreen.SetActive (!inventoryPanel.InventoryScreen.activeSelf);            
+            _inventoryUI.Panel.InventoryScreen.SetActive (!_inventoryUI.Panel.InventoryScreen.activeSelf);            
         }
 
         if (Input.GetKeyUp (KeyCode.E))
         {
-            inventoryPanel.EquipmentScreen.SetActive (!inventoryPanel.EquipmentScreen.activeSelf);            
+            _inventoryUI.Panel.EquipmentScreen.SetActive (!_inventoryUI.Panel.EquipmentScreen.activeSelf);            
         }
 
-        if(inventoryPanel.InventoryScreen.activeSelf)
+        if(_inventoryUI.Panel.InventoryScreen.activeSelf)
         {
-            inventoryPanel.InventroyToggleButton.SetActive (false);
+            _inventoryUI.Panel.InventroyToggleButton.SetActive (false);
         }
         else
         {
-            inventoryPanel.InventroyToggleButton.SetActive (true);
+            _inventoryUI.Panel.InventroyToggleButton.SetActive (true);
         }
 
-        if(inventoryPanel.EquipmentScreen.activeSelf)
+        if(_inventoryUI.Panel.EquipmentScreen.activeSelf)
         {
-            inventoryPanel.EquipmentToggleButton.SetActive (false);
+            _inventoryUI.Panel.EquipmentToggleButton.SetActive (false);
         }
         else
         {
-            inventoryPanel.EquipmentToggleButton.SetActive (true);
+            _inventoryUI.Panel.EquipmentToggleButton.SetActive (true);
         }
-    }
-
-    private void DisableInventoryPanels()
-    {
-        inventoryPanel.InventoryScreen.SetActive (false);        
-        inventoryPanel.EquipmentScreen.SetActive (false);        
-    }
+    }    
 
     public void ToggleScreen(GameObject screen)
     {

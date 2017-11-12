@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Analytics;
 
 public class EquipmentManager : MonoBehaviour
 {
@@ -74,6 +76,12 @@ public class EquipmentManager : MonoBehaviour
                 FeetSlotImage.sprite = newItem.Icon;
                 break;
         }
+
+        Analytics.CustomEvent ("Item Equipped", new Dictionary<string, object>
+        {
+            {"Item Name", newItem.ItemName},
+            {"Item Slot", newItem.EquipmentSlot.ToString()}
+        });
     }
 
     public void UnequipItem(int slotIndex)

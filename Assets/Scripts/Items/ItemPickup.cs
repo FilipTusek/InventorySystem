@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Analytics;
 
 public class ItemPickup : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
@@ -66,7 +68,13 @@ public class ItemPickup : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
                 MyItem.Use ();
                 Destroy (gameObject);
                 break;
-        }             
+        }
+
+        Analytics.CustomEvent ("Item Pickup", new Dictionary<string, object>
+        {
+            {"Item Name", MyItem.ItemName},
+            {"Item Type", MyItem.TypeOfItem.ToString()}
+        });
     }
 
     private void OnDrawGizmosSelected ( )

@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4178062882129432}
   - component: {fileID: 212918715351936032}
   - component: {fileID: 61562453874015760}
+  - component: {fileID: 114825406636535438}
   m_Layer: 0
   m_Name: minecart
   m_TagString: Untagged
@@ -66,6 +67,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8800671, y: 0.84807324}
   m_EdgeRadius: 0
+--- !u!114 &114825406636535438
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1860425305811882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61962e9e2cf6d6e4e87ec50bd55c9755, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212918715351936032
 SpriteRenderer:
   m_ObjectHideFlags: 1

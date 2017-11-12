@@ -680,6 +680,7 @@ GameObject:
   - component: {fileID: 88477130}
   - component: {fileID: 88477131}
   - component: {fileID: 88477137}
+  - component: {fileID: 88477138}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -856,6 +857,73 @@ MonoBehaviour:
     _baseValue: 0
   Inteligence:
     _baseValue: 0
+--- !u!114 &88477138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 88477129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61962e9e2cf6d6e4e87ec50bd55c9755, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &91652827
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 91652829}
+  - component: {fileID: 91652828}
+  - component: {fileID: 91652830}
+  m_Layer: 0
+  m_Name: Analytics
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &91652828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 91652827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 207469858, guid: 852e56802eb941638acbb491814497b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventName: Startup Event
+  m_TrackableProperty:
+    m_Fields: []
+  m_Trigger: 2
+--- !u!4 &91652829
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 91652827}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 27
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &91652830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 91652827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45421b92967e68f459033670a66baf64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &127975798 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4066514710457316, guid: b8a8c70a2b4dce841b14171b8428f938,
@@ -2791,7 +2859,8 @@ Prefab:
       propertyPath: m_Name
       value: minecart (2)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114825406636535438, guid: abcbb6b1dedffdb4b96dd6dff9a85ed9, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: abcbb6b1dedffdb4b96dd6dff9a85ed9, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &545992931 stripped
@@ -6067,7 +6136,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1034589192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6883,6 +6952,7 @@ GameObject:
   - component: {fileID: 1144460918}
   - component: {fileID: 1144460920}
   - component: {fileID: 1144460919}
+  - component: {fileID: 1144460921}
   m_Layer: 5
   m_Name: InventoryPanel
   m_TagString: Untagged
@@ -6929,6 +6999,27 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1144460917}
+--- !u!114 &1144460921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1144460917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 207469858, guid: 852e56802eb941638acbb491814497b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventName: Screen Opened
+  m_TrackableProperty:
+    m_Fields:
+    - m_ParamName: Screen Type
+      m_Target: {fileID: 0}
+      m_FieldPath: 
+      m_TypeString: 
+      m_DoStatic: 1
+      m_StaticString: Inventory Screen
+  m_Trigger: 3
 --- !u!4 &1145275400 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4066514710457316, guid: b8a8c70a2b4dce841b14171b8428f938,
@@ -9463,6 +9554,7 @@ GameObject:
   - component: {fileID: 1664161242}
   - component: {fileID: 1664161241}
   - component: {fileID: 1664161243}
+  - component: {fileID: 1664161244}
   m_Layer: 5
   m_Name: AttributesPanel
   m_TagString: Untagged
@@ -9535,6 +9627,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae04fe98118289140a8e5bd10b3202d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1664161244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1664161239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 207469858, guid: 852e56802eb941638acbb491814497b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventName: Screen Opened
+  m_TrackableProperty:
+    m_Fields:
+    - m_ParamName: Screen Type
+      m_Target: {fileID: 0}
+      m_FieldPath: 
+      m_TypeString: 
+      m_DoStatic: 1
+      m_StaticString: Attributes Screen
+  m_Trigger: 3
 --- !u!1001 &1665214914
 Prefab:
   m_ObjectHideFlags: 0
@@ -9716,6 +9829,7 @@ GameObject:
   - component: {fileID: 1702210285}
   - component: {fileID: 1702210284}
   - component: {fileID: 1702210286}
+  - component: {fileID: 1702210287}
   m_Layer: 5
   m_Name: EquipmentPanel
   m_TagString: Untagged
@@ -9791,6 +9905,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae04fe98118289140a8e5bd10b3202d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1702210287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1702210282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 207469858, guid: 852e56802eb941638acbb491814497b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventName: Screen Opened
+  m_TrackableProperty:
+    m_Fields:
+    - m_ParamName: Screen Type
+      m_Target: {fileID: 0}
+      m_FieldPath: 
+      m_TypeString: 
+      m_DoStatic: 1
+      m_StaticString: Equipment Screen
+  m_Trigger: 3
 --- !u!1001 &1718058601
 Prefab:
   m_ObjectHideFlags: 0
@@ -10484,7 +10619,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e6f64433917d2247a78347304ccd89a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TouchInputEnabled: 1
+  TouchInputEnabled: 0
   ItemBeingDragged: 0
   Drop: 0
   DraggedItemSlot: {fileID: 0}

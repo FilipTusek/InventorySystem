@@ -1,6 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 [CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Item")]
 public class Item : ScriptableObject
@@ -18,7 +18,11 @@ public class Item : ScriptableObject
 
     public virtual void Use()
     {
-
+        Analytics.CustomEvent ("Item USed", new Dictionary<string, object>
+        {
+            {"Item Name", ItemName},
+            {"Item Type", TypeOfItem.ToString()}
+        });
     }
 
     public void RemoveFromInventroy()

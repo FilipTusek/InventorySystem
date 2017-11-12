@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
+using UnityEngine.Analytics;
 
 public class PlayerMovement : MonoBehaviour {
 
@@ -8,10 +10,15 @@ public class PlayerMovement : MonoBehaviour {
     private float _moveHorizontal;
     private float _moveVertical;
 
+    private float _distanceTraveled;
+
+    private int _analyticsEventCalls = 0;
+
     private Animator _playerAC;
     private Rigidbody2D _rigidbody2D;
         
     private Vector3 _movementDirection;
+    private Vector3 _lastPosition;
 
     private DragAndDropManager _dragAndDropManager;
 
@@ -27,6 +34,7 @@ public class PlayerMovement : MonoBehaviour {
     private void Start ( )
     {
         _dragAndDropManager = DragAndDropManager.instance;
+        _lastPosition = transform.position;
     }
 
     void Update ()
@@ -40,6 +48,20 @@ public class PlayerMovement : MonoBehaviour {
         {
             _moveHorizontal = CrossPlatformInputManager.GetAxis ("Horizontal");
             _moveVertical = CrossPlatformInputManager.GetAxis ("Vertical");
+        }
+
+        float distance = Vector3.Distance (_lastPosition, transform.position);
+        _lastPosition = transform.position;
+        _distanceTraveled += distance;
+
+        if(_distanceTraveled >= 10.0f)
+        {
+            if (_analyticsEventCalls < 5)
+            {
+                Analytics.CustomEvent ("Traveled 10 units");
+                _analyticsEventCalls++;
+            }
+            _distanceTraveled = 0.0f;
         }
 	}
 

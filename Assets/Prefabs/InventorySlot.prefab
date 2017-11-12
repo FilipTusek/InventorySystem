@@ -20,8 +20,12 @@ GameObject:
   m_Component:
   - component: {fileID: 224986807086538768}
   - component: {fileID: 222976038330540232}
-  - component: {fileID: 114732558090018418}
   - component: {fileID: 114481988187545212}
+  - component: {fileID: 114732558090018418}
+  - component: {fileID: 114825737254600152}
+  - component: {fileID: 114239612832967888}
+  - component: {fileID: 114392401441281388}
+  - component: {fileID: 114487470121730830}
   m_Layer: 5
   m_Name: Icon
   m_TagString: Untagged
@@ -114,6 +118,35 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 1
+--- !u!114 &114239612832967888
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1463753197057980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 571b065edc65a4f41b4ea02b27b6113a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IgnoreIfOverGui: 0
+  IgnoreIfStartedOverGui: 0
+  OnFingerUp:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114732558090018418}
+        m_MethodName: OnTouchUp
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Lean.Touch.LeanFingerUp+LeanFingerEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &114294785306321664
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -130,6 +163,37 @@ MonoBehaviour:
   StackableItemData: {fileID: 0}
   Item: {fileID: 0}
   IsEmpty: 1
+--- !u!114 &114392401441281388
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1463753197057980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7c1c71d8ad5da9438de3b2e5990763f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IgnoreIfOverGui: 0
+  IgnoreIfStartedOverGui: 0
+  RequiredTapCount: 2
+  RequiredTapInterval: 1
+  OnFingerTap:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114732558090018418}
+        m_MethodName: OnDoubleTap
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Lean.Touch.LeanFingerTap+LeanFingerEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &114420097009759408
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -171,6 +235,37 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114487470121730830
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1463753197057980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7c1c71d8ad5da9438de3b2e5990763f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IgnoreIfOverGui: 0
+  IgnoreIfStartedOverGui: 0
+  RequiredTapCount: 1
+  RequiredTapInterval: 0
+  OnFingerTap:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114732558090018418}
+        m_MethodName: OnSingleTap
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Lean.Touch.LeanFingerTap+LeanFingerEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &114604721050257924
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -213,6 +308,46 @@ MonoBehaviour:
   OverInventorySlot: 0
   IsDragged: 0
   Slot: {fileID: 114294785306321664}
+--- !u!114 &114825737254600152
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1463753197057980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b40c14fc6d3f894fa14ec4b6c180e7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IgnoreIfStartedOverGui: 0
+  MinimumAge: 1
+  MaximumMovement: 20
+  onFingerHeldDown:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114732558090018418}
+        m_MethodName: DragOrDrop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Lean.Touch.LeanFingerHeld+FingerEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onFingerHeldSet:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: Lean.Touch.LeanFingerHeld+FingerEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onFingerHeldUp:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: Lean.Touch.LeanFingerHeld+FingerEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!222 &222542449458770742
 CanvasRenderer:
   m_ObjectHideFlags: 1

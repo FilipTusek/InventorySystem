@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerMovement : MonoBehaviour {
 
@@ -13,6 +13,8 @@ public class PlayerMovement : MonoBehaviour {
         
     private Vector3 _movementDirection;
 
+    private DragAndDropManager _dragAndDropManager;
+
 	void Awake ()
     {
         _playerAC = GetComponent<Animator>();
@@ -22,10 +24,23 @@ public class PlayerMovement : MonoBehaviour {
         _moveVertical = 0.0f;
 	}
 
-	void Update ()
+    private void Start ( )
     {
-        _moveHorizontal = Input.GetAxisRaw("Horizontal");
-        _moveVertical = Input.GetAxisRaw("Vertical");
+        _dragAndDropManager = DragAndDropManager.instance;
+    }
+
+    void Update ()
+    {
+        if (!_dragAndDropManager.TouchInputEnabled)
+        {
+            _moveHorizontal = Input.GetAxisRaw ("Horizontal");
+            _moveVertical = Input.GetAxisRaw ("Vertical");
+        }
+        else
+        {
+            _moveHorizontal = CrossPlatformInputManager.GetAxis ("Horizontal");
+            _moveVertical = CrossPlatformInputManager.GetAxis ("Vertical");
+        }
 	}
 
     void FixedUpdate()

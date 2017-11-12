@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
@@ -28,7 +26,7 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
 
     private Image _itemImage;
 
-    private bool _pointerOver = false;  
+    private bool _pointerOver = false;    
 
     private void Start ( )
     {
@@ -153,17 +151,20 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
         {
             if (!IsDragged)
             {
-                IsDragged = true;
-                Slot.IsEmpty = true;
-                _dragAndDropManager.ItemBeingDragged = true;
+                if (_pointerOver)
+                {
+                    IsDragged = true;
+                    Slot.IsEmpty = true;
+                    _dragAndDropManager.ItemBeingDragged = true;
 
-                transform.SetParent (transform.root.transform);
+                    transform.SetParent (transform.root.transform);
 
-                _dragAndDropManager.DraggedItemSlot = _slotTransform.gameObject.GetComponent<InventorySlot> ();
-                _dragAndDropManager.DraggedItem = this;
+                    _dragAndDropManager.DraggedItemSlot = _slotTransform.gameObject.GetComponent<InventorySlot> ();
+                    _dragAndDropManager.DraggedItem = this;
 
-                _itemImage.raycastTarget = false;                
-            }            
+                    _itemImage.raycastTarget = false;
+                }
+            }
         }
         else
         {
@@ -171,25 +172,14 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
             {
                 if (!OverAvailableSlot)
                 {
-                    if (!OverInventorySlot)
-                    {
-                        IsDragged = false;
-                        _dragAndDropManager.ItemBeingDragged = false;                       
+                    IsDragged = false;
+                    _dragAndDropManager.ItemBeingDragged = false;
+                    transform.SetParent (_slotTransform);
 
-                        transform.SetParent (_slotTransform);
-                        
-                        _itemImage.raycastTarget = true;
+                    _itemImage.raycastTarget = true;                   
 
-                        _dragAndDropManager.DraggedItem = null;
-                    }
-                    else
-                    {
-                        IsDragged = false;
-                        _dragAndDropManager.ItemBeingDragged = false;
-                        transform.SetParent (_slotTransform);
-                        
-                        _itemImage.raycastTarget = true;
-
+                    if (OverInventorySlot)
+                    {                       
                         _dragAndDropManager.NewSlot.AddItem (_dragAndDropManager.DraggedItemSlot.Item);
 
                         if (_dragAndDropManager.NewSlot.StackableItemData != null && Slot.StackableItemData != null)
@@ -198,32 +188,84 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
                             _dragAndDropManager.NewSlot.StackableItemData.UpdateStack ();
                         }
 
-                        if (_dragAndDropManager.NewSlot.GetInstanceID() != Slot.GetInstanceID())
+                        if (_dragAndDropManager.NewSlot.GetInstanceID () != Slot.GetInstanceID ())
                         {
                             Slot.ClearSlot ();
-                        }
-
-                        _dragAndDropManager.DraggedItem = null;
-                        _dragAndDropManager.DraggedItemSlot = null;
+                        }                        
                     }
+                    _dragAndDropManager.DraggedItem = null;
+                    _dragAndDropManager.DraggedItemSlot = null;
                 }
                 else if (OverAvailableSlot)
                 {
-                    IsDragged = false;
-                    _dragAndDropManager.ItemBeingDragged = false;   
-                    
-                    _equipmentManager.Equip ((Equipment) Slot.Item);
-                    transform.SetParent (_slotTransform);
-
-                    Slot.Item.RemoveFromInventroy ();
-                    Slot.ClearSlot ();                    
-
-                    _itemImage.raycastTarget = true;
-
-                    _dragAndDropManager.DraggedItem = null;
-                    _dragAndDropManager.DraggedItemSlot = null;
-                }                            
+                    EquipItem ();            
+                }
             }
+        }        
+    }
+
+    public void OnTouchUp()
+    {
+        if (IsDragged)
+        {
+            if(_dragAndDropManager.Drop)
+            {
+                _dragAndDropManager.DropItem ();
+            }
+
+            if (!OverAvailableSlot)
+            {
+                IsDragged = false;
+                _dragAndDropManager.ItemBeingDragged = false;
+                transform.SetParent (_slotTransform);
+
+                _itemImage.raycastTarget = true;
+
+                if (OverInventorySlot)
+                {
+                    _dragAndDropManager.NewSlot.AddItem (_dragAndDropManager.DraggedItemSlot.Item);
+
+                    if (_dragAndDropManager.NewSlot.StackableItemData != null && Slot.StackableItemData != null)
+                    {
+                        _dragAndDropManager.NewSlot.StackableItemData.StackSize = Slot.StackableItemData.StackSize;
+                        _dragAndDropManager.NewSlot.StackableItemData.UpdateStack ();
+                    }
+
+                    if (_dragAndDropManager.NewSlot.GetInstanceID () != Slot.GetInstanceID ())
+                    {
+                        Slot.ClearSlot ();
+                    }
+                }
+                _dragAndDropManager.DraggedItem = null;
+                _dragAndDropManager.DraggedItemSlot = null;
+            }
+            else if (OverAvailableSlot)
+            {
+                EquipItem ();
+            }
+        }
+    }
+
+    public void OnDoubleTap()
+    {
+        if (_pointerOver)
+        {
+            if (Slot.Item.TypeOfItem == ItemType.EquipableItem)
+            {
+                EquipItem ();
+            }
+            else if(Slot.Item.ItemCategory == Item.CategoryType.Potion)
+            {
+                UseItem ();                
+            }
+        }
+    }
+
+    public void OnSingleTap ( )
+    {
+        if (_pointerOver)
+        {
+            ShowTooltip ();
         }
     }
 
@@ -232,49 +274,64 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
         if (Slot.Item != null)
         {
             Equipment item = (Equipment) Slot.Item;
-            Slot.ClearSlot ();
-            _equipmentManager.Equip (item);
-            item.RemoveFromInventroy ();
-        }               
-    }
 
+            Slot.ClearSlot ();
+            OverAvailableSlot = false;
+            _equipmentManager.Equip (item);
+
+            item.RemoveFromInventroy ();
+            transform.SetParent (_slotTransform);
+
+            IsDragged = false;
+            _dragAndDropManager.ItemBeingDragged = false;
+
+            _itemImage.raycastTarget = true;
+
+            _dragAndDropManager.DraggedItem = null;
+            _dragAndDropManager.DraggedItemSlot = null;
+        }               
+    } 
+    
     private void UseItem()
     {
-        Slot.Item.Use ();
+        UsableItem usable = (UsableItem) Slot.Item;
+
+        usable.Use ();
+
+        if (Slot.StackableItemData.StackSize > 1)
+        {
+            Slot.StackableItemData.StackSize--;
+            Slot.StackableItemData.UpdateStack ();
+        }
+        else
+        {
+            Slot.Item.RemoveFromInventroy ();
+            Slot.ClearSlot ();
+        }
     }
 
     public void OnPointerClick (PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Left)
-        {            
-            DragOrDrop ();
-        }
-
-        if (eventData.button == PointerEventData.InputButton.Right)
+        if (!_dragAndDropManager.TouchInputEnabled)
         {
-            if (Slot.Item.TypeOfItem == ItemType.EquipableItem)
+            if (eventData.button == PointerEventData.InputButton.Left)
             {
-                EquipItem ();
+                DragOrDrop ();
             }
-        }
 
-        if(eventData.button == PointerEventData.InputButton.Middle)
-        {
-            if (Slot.Item.ItemCategory == Item.CategoryType.Potion)
+            if (eventData.button == PointerEventData.InputButton.Right)
             {
-                UsableItem usable = (UsableItem) Slot.Item;
-
-                usable.Use ();
-
-                if(Slot.StackableItemData.StackSize > 1)
+                if (Slot.Item.TypeOfItem == ItemType.EquipableItem)
                 {
-                    Slot.StackableItemData.StackSize--;
-                    Slot.StackableItemData.UpdateStack ();
+                    EquipItem ();
                 }
-                else
+            }
+
+            if (eventData.button == PointerEventData.InputButton.Middle)
+            {
+                if (Slot.Item.ItemCategory == Item.CategoryType.Potion)
                 {
-                    Slot.Item.RemoveFromInventroy ();
-                    Slot.ClearSlot ();
+                    UseItem ();
                 }
             }
         }
@@ -283,12 +340,16 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
     public void OnPointerEnter(PointerEventData eventData)
     {
         _pointerOver = true;
-        ShowTooltip ();
+
+        if (!_dragAndDropManager.TouchInputEnabled)
+        {
+            ShowTooltip ();
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        _pointerOver = false;
-        HideTooltip ();
-    }
+        _pointerOver = false;        
+        HideTooltip ();        
+    }   
 }

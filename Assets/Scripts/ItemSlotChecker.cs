@@ -16,18 +16,22 @@ public class ItemSlotChecker : MonoBehaviour, IPointerEnterHandler, IPointerExit
     private DragAndDropManager _dragAndDropManager;
     private EquipmentManager _equipmentManager;
 
+    private InventorySlot _inventorySlot;
+
     private bool _pointerOver = false;
 
     private void Start ( )
     {
         _dragAndDropManager = DragAndDropManager.instance;        
         _equipmentManager = EquipmentManager.instance;
+
+        _inventorySlot = GetComponent<InventorySlot> ();
     }
 
     private void Update ( )
     {
         if(_pointerOver && Input.GetKeyDown(KeyCode.U))
-        {
+        {            
             UnequipItem ();
         }
     }
@@ -44,6 +48,14 @@ public class ItemSlotChecker : MonoBehaviour, IPointerEnterHandler, IPointerExit
                     _equipmentManager.UnequipItem ((int) SlotEquipmentSlot);
                 }
             }
+        }
+    }
+
+    public void OnDoubleTouch()
+    {
+        if (_pointerOver)
+        {
+            UnequipItem ();
         }
     }
 
@@ -66,8 +78,11 @@ public class ItemSlotChecker : MonoBehaviour, IPointerEnterHandler, IPointerExit
             case SlotType.InventorySlot:
                 if (_dragAndDropManager.DraggedItemSlot != null && _dragAndDropManager.DraggedItem != null)
                 {
-                    _dragAndDropManager.DraggedItem.OverInventorySlot = true;
-                    _dragAndDropManager.NewSlot = GetComponent<InventorySlot> ();
+                    if (_inventorySlot.IsEmpty)
+                    {
+                        _dragAndDropManager.DraggedItem.OverInventorySlot = true;
+                        _dragAndDropManager.NewSlot = _inventorySlot;
+                    }
                 }
                 break;
         }
@@ -91,16 +106,19 @@ public class ItemSlotChecker : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     public void OnPointerClick ( PointerEventData eventData )
     {
-        if (eventData.button == PointerEventData.InputButton.Left)
+        if (!_dragAndDropManager.TouchInputEnabled)
         {
-            if (_dragAndDropManager.DraggedItemSlot != null && _dragAndDropManager.DraggedItem != null)
+            if (eventData.button == PointerEventData.InputButton.Left)
             {
-                _dragAndDropManager.DraggedItem.DragOrDrop ();
+                if (_dragAndDropManager.DraggedItemSlot != null && _dragAndDropManager.DraggedItem != null)
+                {
+                    _dragAndDropManager.DraggedItem.DragOrDrop ();
+                }
             }
-        }
-        else if(eventData.button == PointerEventData.InputButton.Right)
-        {
-            UnequipItem ();
+            else if (eventData.button == PointerEventData.InputButton.Right)
+            {
+                UnequipItem ();
+            }
         }
     }
 }

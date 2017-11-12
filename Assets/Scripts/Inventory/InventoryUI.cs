@@ -80,7 +80,7 @@ public class InventoryUI : MonoBehaviour
         _itemAdded = false;
 
         //Handles item icons and stacks inside inventory UI
-        if (_inventoryLength < _inventory.Items.Count)
+        if (_inventoryLength <= _inventory.Items.Count)
         {
             for (int i = 0; i < slots.Length; i++)
             {

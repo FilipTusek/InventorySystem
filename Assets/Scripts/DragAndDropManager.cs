@@ -6,6 +6,8 @@ public class DragAndDropManager : MonoBehaviour
 {
     public static DragAndDropManager instance;
 
+    public bool TouchInputEnabled = false;
+
     public bool ItemBeingDragged = false;
     public bool Drop = false;
 

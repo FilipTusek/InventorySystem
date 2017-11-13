@@ -14,15 +14,21 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
 
     private GameObject _inventoryScreen;
     private GameObject _equipmentScreen;
+    private GameObject _stackSplitScreen;
+
     private GameObject _equipmentTooltipScreen;
-    private GameObject _consumableTooltipScreen;
+    private GameObject _consumableTooltipScreen;    
 
     private DragAndDropManager _dragAndDropManager;
     private EquipmentManager _equipmentManager;
+
     private Inventory _inventory;
     private InventoryUI _inventoryUI;
+    
     private Tooltip _equipmentTooltip;
     private Tooltip _consumableTooltip;
+
+    private StackSplitting _stackSplitting;
 
     private Image _itemImage;
 
@@ -34,6 +40,7 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
         _equipmentManager = EquipmentManager.instance;
         _inventory = Inventory.instance;
         _inventoryUI = InventoryUI.instance;
+        _stackSplitting = StackSplitting.instance;
         
         Slot = GetComponentInParent<InventorySlot> ();       
         _itemImage = GetComponent<Image> ();
@@ -42,6 +49,8 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
 
         _inventoryScreen = _inventoryUI.Panel.InventoryScreen;
         _equipmentScreen = _inventoryUI.Panel.EquipmentScreen;
+        _stackSplitScreen = _inventoryUI.Panel.StackSplitScreen;
+
         _equipmentTooltipScreen = _inventoryUI.Panel.EquipmentTooltipScreen;
         _consumableTooltipScreen = _inventoryUI.Panel.ConsumableTooltipScreen;
 
@@ -54,6 +63,7 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
         SetItemPosition ();
         CheckForItemDrop ();
         CheckForEquip ();
+        CheckForItemSplit ();
     }
 
     private void SetItemPosition ( )
@@ -103,6 +113,14 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
         if (_pointerOver && Input.GetKeyDown (KeyCode.Q))
         {
             EquipItem ();
+        }
+    }
+
+    private void CheckForItemSplit()
+    {
+        if(_pointerOver && Input.GetKeyDown(KeyCode.F))
+        {
+            ShowStackSplitScreen ();
         }
     }
 
@@ -244,9 +262,22 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
                 EquipItem ();
             }
         }
+    }   
+
+    public void OnSingleTap ( )
+    {
+        if (_pointerOver)
+        {
+            ShowTooltip ();
+
+            if (Slot.Item.TypeOfItem == ItemType.StackableItem)
+            {
+                ShowStackSplitScreen ();
+            }
+        }
     }
 
-    public void OnDoubleTap()
+    public void OnDoubleTap ( )
     {
         if (_pointerOver)
         {
@@ -254,20 +285,12 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
             {
                 EquipItem ();
             }
-            else if(Slot.Item.ItemCategory == Item.CategoryType.Potion)
+            else if (Slot.Item.ItemCategory == Item.CategoryType.Potion)
             {
-                UseItem ();                
+                UseItem ();
             }
         }
-    }
-
-    public void OnSingleTap ( )
-    {
-        if (_pointerOver)
-        {
-            ShowTooltip ();
-        }
-    }
+    }   
 
     public void EquipItem()
     {
@@ -310,6 +333,22 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
         }
     }
 
+    private void ShowStackSplitScreen()
+    {
+        _stackSplitScreen.SetActive (true);
+
+        _stackSplitting.StackMaximum = Slot.StackableItemData.StackSize - 1;
+        _stackSplitting.StackAmount = _stackSplitting.StackMaximum;
+
+        _stackSplitting.StackText.text = (_stackSplitting.StackAmount).ToString ();
+
+        _stackSplitting.StackSlider.maxValue = _stackSplitting.StackAmount;
+        _stackSplitting.StackSlider.value = _stackSplitting.StackAmount;
+
+        _stackSplitting.Slot = Slot;
+        _stackSplitting.Slots = _inventoryUI.Slots;
+    }
+
     public void OnPointerClick (PointerEventData eventData)
     {
         if (!_dragAndDropManager.TouchInputEnabled)
@@ -324,6 +363,10 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
                 if (Slot.Item.TypeOfItem == ItemType.EquipableItem)
                 {
                     EquipItem ();
+                }
+                else if(Slot.Item.TypeOfItem == ItemType.StackableItem)
+                {
+                    ShowStackSplitScreen ();
                 }
             }
 

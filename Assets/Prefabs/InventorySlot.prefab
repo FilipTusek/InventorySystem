@@ -84,6 +84,7 @@ MonoBehaviour:
   StackSize: 1
   StackLimit: 0
   LimitedStackSize: 0
+  ItemSplit: 0
   StackNumber: {fileID: 114192148435329154}
 --- !u!114 &114192148435329154
 MonoBehaviour:

@@ -7,6 +7,7 @@ public class StackableItemData : MonoBehaviour
     public int StackLimit;
 
     public bool LimitedStackSize = true;
+    public bool ItemSplit = false;
 
     public Text StackNumber;   
 

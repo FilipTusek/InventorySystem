@@ -15,6 +15,7 @@ public class InventoryUI : MonoBehaviour
         public GameObject InventoryScreen;
         public GameObject EquipmentScreen;
         public GameObject AttributesScreen;
+        public GameObject StackSplitScreen;
 
         public GameObject EquipmentTooltipScreen;
         public GameObject ConsumableTooltipScreen;
@@ -24,9 +25,9 @@ public class InventoryUI : MonoBehaviour
         public GameObject AttributesToggleButton;
     }
 
-    public InventoryPanel Panel;
+    public InventoryPanel Panel;    
 
-    private InventorySlot [] slots; 
+    public InventorySlot [] Slots; 
 
     private Inventory _inventory;
 
@@ -57,7 +58,7 @@ public class InventoryUI : MonoBehaviour
 
         _dragAndDropManager = DragAndDropManager.instance;
 
-        slots = ItemsParent.GetComponentsInChildren<InventorySlot> ();
+        Slots = ItemsParent.GetComponentsInChildren<InventorySlot> ();
 
         DisableInventoryPanels ();
     }
@@ -67,6 +68,7 @@ public class InventoryUI : MonoBehaviour
         Panel.InventoryScreen.SetActive (false);
         Panel.EquipmentScreen.SetActive (false);
         Panel.AttributesScreen.SetActive (false);
+        Panel.StackSplitScreen.SetActive (false);
 
         Panel.EquipmentTooltipScreen.SetActive (false);
         Panel.ConsumableTooltipScreen.SetActive (false);        
@@ -82,15 +84,15 @@ public class InventoryUI : MonoBehaviour
         //Handles item icons and stacks inside inventory UI
         if (_inventoryLength <= _inventory.Items.Count)
         {
-            for (int i = 0; i < slots.Length; i++)
+            for (int i = 0; i < Slots.Length; i++)
             {
                 Item item = _inventory.Items [_inventory.Items.Count - 1];
 
                 if (item.TypeOfItem == ItemType.EquipableItem)
                 {
-                    if (slots [i].IsEmpty && !_itemAdded)
+                    if (Slots [i].IsEmpty && !_itemAdded)
                     {
-                        slots [i].AddItem (item);
+                        Slots [i].AddItem (item);
                         _itemAdded = true;
                     }
                 }
@@ -98,32 +100,38 @@ public class InventoryUI : MonoBehaviour
                 {
                     if (!_itemAdded)
                     {                        
-                        if (slots [i].Item != null)  
+                        if (Slots [i].Item != null)  
                         {
-                            if (slots [i].Item.ItemName == item.ItemName)
+                            if (Slots [i].Item.ItemName == item.ItemName)
                             {
-                                if (slots [i].StackableItemData.LimitedStackSize && slots[i].StackableItemData.StackSize < slots [i].StackableItemData.StackLimit)
+                                if (Slots [i].StackableItemData.LimitedStackSize && Slots[i].StackableItemData.StackSize < Slots [i].StackableItemData.StackLimit)
                                 {
                                     if (!_stacked)
                                     {
-                                        slots [i].StackableItemData.StackSize++;
-                                        slots [i].StackableItemData.UpdateStack ();
-                                        _inventory.Items.Remove (item);
-                                        RemoveRowFromInventory ();
-                                        _itemAdded = true;
-                                        _stacked = true;
+                                        if (!Slots [i].StackableItemData.ItemSplit)
+                                        {
+                                            Slots [i].StackableItemData.StackSize++;
+                                            Slots [i].StackableItemData.UpdateStack ();
+                                            _inventory.Items.Remove (item);
+                                            RemoveRowFromInventory ();
+                                            _itemAdded = true;
+                                            _stacked = true;
+                                        }
                                     }
                                 }
-                                else if(!slots [i].StackableItemData.LimitedStackSize)
+                                else if(!Slots [i].StackableItemData.LimitedStackSize)
                                 {
                                     if(!_stacked)
                                     {
-                                        slots [i].StackableItemData.StackSize++;
-                                        slots [i].StackableItemData.UpdateStack ();
-                                        _inventory.Items.Remove (item);
-                                        RemoveRowFromInventory ();
-                                        _itemAdded = true;
-                                        _stacked = true;
+                                        if (!Slots [i].StackableItemData.ItemSplit)
+                                        {
+                                            Slots [i].StackableItemData.StackSize++;
+                                            Slots [i].StackableItemData.UpdateStack ();
+                                            _inventory.Items.Remove (item);
+                                            RemoveRowFromInventory ();
+                                            _itemAdded = true;
+                                            _stacked = true;
+                                        }
                                     }
                                 }                                
                             }                            
@@ -132,7 +140,7 @@ public class InventoryUI : MonoBehaviour
                         {
                             if (!_itemAdded)
                             {
-                                slots [i].AddItem (item);                               
+                                Slots [i].AddItem (item);                               
                                 _itemAdded = true;
                             }
                         }
@@ -209,12 +217,12 @@ public class InventoryUI : MonoBehaviour
     
     private void AddRowToInventory()
     {        
-        if (_inventory.Items.Count > slots.Length)
+        if (_inventory.Items.Count > Slots.Length)
         {
             for (int i = 0; i < 8; i++)
             {
                 Instantiate (InventorySlotGameObject, ItemsParent);
-                slots = ItemsParent.GetComponentsInChildren<InventorySlot> ();
+                Slots = ItemsParent.GetComponentsInChildren<InventorySlot> ();
             }
         }        
     }
@@ -223,13 +231,13 @@ public class InventoryUI : MonoBehaviour
     {        
         if (_inventory.Items.Count >= 32)
         {
-            if (_inventory.Items.Count <= slots.Length - 8)
+            if (_inventory.Items.Count <= Slots.Length - 8)
             {
                 for (int i = 0; i < 8; i++)
                 {
-                    Destroy (slots [slots.Length - (i + 1)].gameObject);
+                    Destroy (Slots [Slots.Length - (i + 1)].gameObject);
                 }
-                System.Array.Resize (ref slots, slots.Length - 8);
+                System.Array.Resize (ref Slots, Slots.Length - 8);
             }
         }
     }

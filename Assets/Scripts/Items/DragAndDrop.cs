@@ -120,7 +120,10 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
     {
         if(_pointerOver && Input.GetKeyDown(KeyCode.F))
         {
-            ShowStackSplitScreen ();
+            if (Slot.Item.TypeOfItem == ItemType.StackableItem)
+            {
+                ShowStackSplitScreen ();
+            }
         }
     }
 

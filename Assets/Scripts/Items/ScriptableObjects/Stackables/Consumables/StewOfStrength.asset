@@ -18,6 +18,6 @@ MonoBehaviour:
   TypeOfItem: 2
   HasStackLimit: 0
   StackLimit: 5
-  ItemDescription: 
+  ItemDescription: Gives +30% strength for 4 sec
   TypeOfUsableItem: 4
   EffectAmount: 30

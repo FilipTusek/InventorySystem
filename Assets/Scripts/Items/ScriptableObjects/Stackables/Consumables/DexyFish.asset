@@ -18,6 +18,6 @@ MonoBehaviour:
   TypeOfItem: 2
   HasStackLimit: 0
   StackLimit: 5
-  ItemDescription: 
+  ItemDescription: Ads 20 Dex over 2 sec and holds buff for aditional 5 sec
   TypeOfUsableItem: 5
   EffectAmount: 20

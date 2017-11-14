@@ -18,6 +18,6 @@ MonoBehaviour:
   TypeOfItem: 2
   HasStackLimit: 0
   StackLimit: 5
-  ItemDescription: 
+  ItemDescription: Recovers 30 health over 3 sec
   TypeOfUsableItem: 6
   EffectAmount: 30

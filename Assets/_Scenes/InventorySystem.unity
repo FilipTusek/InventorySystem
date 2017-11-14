@@ -955,7 +955,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &91652830
 MonoBehaviour:
@@ -2460,7 +2460,7 @@ Transform:
   - {fileID: 608944258}
   - {fileID: 1402861343}
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &401908323
 Prefab:
@@ -3323,8 +3323,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: Lean.Touch.LeanFingerTap+LeanFingerEvent, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+    m_TypeName: Lean.Touch.LeanFingerTap+LeanFingerEvent, Assembly-CSharp-firstpass,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!1001 &521507226
 Prefab:
   m_ObjectHideFlags: 0
@@ -3570,7 +3570,7 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1172775353}
     m_Modifications:
     - target: {fileID: 4178062882129432, guid: abcbb6b1dedffdb4b96dd6dff9a85ed9, type: 2}
       propertyPath: m_LocalPosition.x
@@ -3586,15 +3586,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4178062882129432, guid: abcbb6b1dedffdb4b96dd6dff9a85ed9, type: 2}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4178062882129432, guid: abcbb6b1dedffdb4b96dd6dff9a85ed9, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4178062882129432, guid: abcbb6b1dedffdb4b96dd6dff9a85ed9, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4178062882129432, guid: abcbb6b1dedffdb4b96dd6dff9a85ed9, type: 2}
       propertyPath: m_LocalRotation.w
@@ -3602,7 +3602,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4178062882129432, guid: abcbb6b1dedffdb4b96dd6dff9a85ed9, type: 2}
       propertyPath: m_RootOrder
-      value: 13
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1860425305811882, guid: abcbb6b1dedffdb4b96dd6dff9a85ed9, type: 2}
       propertyPath: m_Name
@@ -3874,7 +3874,7 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1172775353}
     m_Modifications:
     - target: {fileID: 4178062882129432, guid: abcbb6b1dedffdb4b96dd6dff9a85ed9, type: 2}
       propertyPath: m_LocalPosition.x
@@ -3890,15 +3890,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4178062882129432, guid: abcbb6b1dedffdb4b96dd6dff9a85ed9, type: 2}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4178062882129432, guid: abcbb6b1dedffdb4b96dd6dff9a85ed9, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4178062882129432, guid: abcbb6b1dedffdb4b96dd6dff9a85ed9, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4178062882129432, guid: abcbb6b1dedffdb4b96dd6dff9a85ed9, type: 2}
       propertyPath: m_LocalRotation.w
@@ -3906,7 +3906,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4178062882129432, guid: abcbb6b1dedffdb4b96dd6dff9a85ed9, type: 2}
       propertyPath: m_RootOrder
-      value: 14
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1860425305811882, guid: abcbb6b1dedffdb4b96dd6dff9a85ed9, type: 2}
       propertyPath: m_Name
@@ -4787,7 +4787,7 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1172775353}
     m_Modifications:
     - target: {fileID: 4178062882129432, guid: abcbb6b1dedffdb4b96dd6dff9a85ed9, type: 2}
       propertyPath: m_LocalPosition.x
@@ -4803,15 +4803,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4178062882129432, guid: abcbb6b1dedffdb4b96dd6dff9a85ed9, type: 2}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4178062882129432, guid: abcbb6b1dedffdb4b96dd6dff9a85ed9, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4178062882129432, guid: abcbb6b1dedffdb4b96dd6dff9a85ed9, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4178062882129432, guid: abcbb6b1dedffdb4b96dd6dff9a85ed9, type: 2}
       propertyPath: m_LocalRotation.w
@@ -4819,7 +4819,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4178062882129432, guid: abcbb6b1dedffdb4b96dd6dff9a85ed9, type: 2}
       propertyPath: m_RootOrder
-      value: 15
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: abcbb6b1dedffdb4b96dd6dff9a85ed9, type: 2}
@@ -6911,7 +6911,7 @@ RectTransform:
   m_Children:
   - {fileID: 1809838540}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -7100,8 +7100,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: Lean.Touch.LeanFingerTap+LeanFingerEvent, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+    m_TypeName: Lean.Touch.LeanFingerTap+LeanFingerEvent, Assembly-CSharp-firstpass,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!1 &1062040806
 GameObject:
   m_ObjectHideFlags: 0
@@ -7216,8 +7216,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: Lean.Touch.LeanFingerTap+LeanFingerEvent, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+    m_TypeName: Lean.Touch.LeanFingerTap+LeanFingerEvent, Assembly-CSharp-firstpass,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!1001 &1065596620
 Prefab:
   m_ObjectHideFlags: 0
@@ -8092,6 +8092,37 @@ Transform:
   - {fileID: 1955998892}
   m_Father: {fileID: 0}
   m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1172775352
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1172775353}
+  m_Layer: 0
+  m_Name: MineCarts
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1172775353
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1172775352}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2095190973}
+  - {fileID: 1595452572}
+  - {fileID: 1953339792}
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1189740238
 GameObject:
@@ -9957,7 +9988,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1520028930 stripped
 Transform:
@@ -10471,6 +10502,11 @@ Transform:
   m_PrefabParentObject: {fileID: 4787304557419912, guid: fbe8f2d1356f64440a7de1aff4479af1,
     type: 2}
   m_PrefabInternal: {fileID: 1584004010}
+--- !u!4 &1595452572 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4178062882129432, guid: abcbb6b1dedffdb4b96dd6dff9a85ed9,
+    type: 2}
+  m_PrefabInternal: {fileID: 603866380}
 --- !u!1001 &1599329748
 Prefab:
   m_ObjectHideFlags: 0
@@ -11697,7 +11733,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1809838540
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12693,8 +12729,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: Lean.Touch.LeanFingerTap+LeanFingerEvent, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+    m_TypeName: Lean.Touch.LeanFingerTap+LeanFingerEvent, Assembly-CSharp-firstpass,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!1001 &1922393169
 Prefab:
   m_ObjectHideFlags: 0
@@ -12792,6 +12828,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0be4ab90d72976e48a32af00701815a8, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &1953339792 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4178062882129432, guid: abcbb6b1dedffdb4b96dd6dff9a85ed9,
+    type: 2}
+  m_PrefabInternal: {fileID: 703686107}
 --- !u!1001 &1955998891
 Prefab:
   m_ObjectHideFlags: 0
@@ -13561,6 +13602,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b8a8c70a2b4dce841b14171b8428f938, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &2095190973 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4178062882129432, guid: abcbb6b1dedffdb4b96dd6dff9a85ed9,
+    type: 2}
+  m_PrefabInternal: {fileID: 532682360}
 --- !u!1001 &2123495946
 Prefab:
   m_ObjectHideFlags: 0

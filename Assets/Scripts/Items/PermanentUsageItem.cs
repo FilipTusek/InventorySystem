@@ -9,6 +9,6 @@ public class PermanentUsageItem : Item
     {
         base.Use ();
 
-        Debug.Log (ItemName + " consumed!");
+        Debug.Log (ItemName + " consumed! Player buffed!");
     }
 }

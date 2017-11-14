@@ -22,7 +22,7 @@ public class Stat
         {
             _modifiers.Add (modifier);
         }
-    }
+    }   
 
     public void RemoveModifier(int modifier)
     {

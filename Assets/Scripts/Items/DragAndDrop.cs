@@ -285,7 +285,7 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
             {
                 EquipItem ();
             }
-            else if (Slot.Item.ItemCategory == Item.CategoryType.Potion)
+            else if (Slot.Item.ItemCategory == Item.CategoryType.Usable)
             {
                 UseItem ();
             }
@@ -372,7 +372,7 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
 
             if (eventData.button == PointerEventData.InputButton.Middle)
             {
-                if (Slot.Item.ItemCategory == Item.CategoryType.Potion)
+                if (Slot.Item.ItemCategory == Item.CategoryType.Usable)
                 {
                     UseItem ();
                 }

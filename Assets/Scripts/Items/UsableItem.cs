@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu (fileName = "Consumable Item", menuName = "Inventory/Stackable Item/ConsumableItem")]
 public class UsableItem : StackableItem
 {
-	public enum UsableItemType { HealthPotion, ManaPotion, PoisonPotion, DrainPotion}
+	public enum UsableItemType { HealthPotion, ManaPotion, PoisonPotion, DrainPotion, StewOfStrength, DexyFish}
     public UsableItemType TypeOfUsableItem;
 
     public int EffectAmount = 0;
@@ -30,6 +30,14 @@ public class UsableItem : StackableItem
 
             case UsableItemType.DrainPotion:
                 PlayerStats.instance.DepleteMana (EffectAmount);
+                break;
+
+            case UsableItemType.StewOfStrength:
+                PlayerStats.instance.StartCoroutine (PlayerStats.instance.BuffWithConstantValue ("Strength", EffectAmount, 4.0f, Icon));                
+                break;
+
+            case UsableItemType.DexyFish:
+                PlayerStats.instance.StartCoroutine (PlayerStats.instance.BuffGradualyAndHoldValue ("Dexterity", EffectAmount, 2, 5, Icon));
                 break;
         }        
     }

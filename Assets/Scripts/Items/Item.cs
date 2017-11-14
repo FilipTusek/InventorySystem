@@ -11,7 +11,7 @@ public class Item : ScriptableObject
 
     public GameObject ItemPrefab;
 
-    public enum CategoryType { Weapon, Shield, Helmet, Boots, Potion, Misc }
+    public enum CategoryType { Weapon, Shield, Helmet, Boots, Usable, Misc }
     public CategoryType ItemCategory;
         
     public ItemType TypeOfItem;    

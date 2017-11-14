@@ -20,9 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4547466419322844}
   - component: {fileID: 212522719206817344}
-  - component: {fileID: 114763614306846502}
   - component: {fileID: 50498837812197552}
   - component: {fileID: 61279304697172786}
+  - component: {fileID: 114763614306846502}
   m_Layer: 0
   m_Name: HealthPotionPickup
   m_TagString: Item

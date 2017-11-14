@@ -12,6 +12,11 @@ public class EquipmentManager : MonoBehaviour
     public Image MainHandSlotImage;
     public Image OffHandSlotImage;
     public Image FeetSlotImage;
+
+    public GameObject HeadSlot;
+    public GameObject MainHandSlot;
+    public GameObject OffHandSlot;
+    public GameObject FeetSlot;
     
     public delegate void OnEquipmentChanged ( Equipment newItem, Equipment oldItem );
     public OnEquipmentChanged OnEquipmentChangedCallback;
@@ -63,17 +68,17 @@ public class EquipmentManager : MonoBehaviour
 
             case EquipmentSlotType.MainHand:
                 MainHandSlotImage.enabled = true;
-                MainHandSlotImage.sprite = newItem.Icon;
+                MainHandSlotImage.sprite = newItem.Icon;              
                 break;
 
             case EquipmentSlotType.OffHand:
                 OffHandSlotImage.enabled = true;
-                OffHandSlotImage.sprite = newItem.Icon;
+                OffHandSlotImage.sprite = newItem.Icon;              
                 break;
 
             case EquipmentSlotType.Feet:
                 FeetSlotImage.enabled = true;
-                FeetSlotImage.sprite = newItem.Icon;
+                FeetSlotImage.sprite = newItem.Icon;                
                 break;
         }
 

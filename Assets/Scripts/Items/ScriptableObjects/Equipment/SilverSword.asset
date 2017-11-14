@@ -14,9 +14,11 @@ MonoBehaviour:
   ItemName: Silver Sword
   Icon: {fileID: 21300000, guid: f2bbcce74669b9a4e9ec8421d230da48, type: 3}
   ItemPrefab: {fileID: 1099272498600238, guid: b8a8c70a2b4dce841b14171b8428f938, type: 2}
+  ItemCategory: 0
   TypeOfItem: 1
   EquipmentSlot: 1
   StrengthModifier: 0
   DexterityModifier: 2
   AgilityModifier: 0
   InteligenceModifier: 0
+  Durability: 7

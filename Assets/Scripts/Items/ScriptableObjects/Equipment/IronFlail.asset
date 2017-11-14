@@ -14,9 +14,11 @@ MonoBehaviour:
   ItemName: Iron Flail
   Icon: {fileID: 21300000, guid: ce3f8ff957714e34f910962898f81e1b, type: 3}
   ItemPrefab: {fileID: 1868363522306742, guid: cf44c55ec421b4043a576f8e4bb4e8ff, type: 2}
+  ItemCategory: 0
   TypeOfItem: 1
   EquipmentSlot: 1
   StrengthModifier: 3
   DexterityModifier: 0
   AgilityModifier: 0
   InteligenceModifier: 0
+  Durability: 4

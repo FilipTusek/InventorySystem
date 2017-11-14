@@ -20,9 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4066514710457316}
   - component: {fileID: 212192123336529190}
-  - component: {fileID: 114596809964427782}
   - component: {fileID: 50825257674888054}
   - component: {fileID: 61807809310418138}
+  - component: {fileID: 114596809964427782}
   m_Layer: 0
   m_Name: SilverSwordPickup
   m_TagString: Item
@@ -37,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1099272498600238}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.667018, y: -0.086, z: 0}
+  m_LocalPosition: {x: -3.2408438, y: 0.772408, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

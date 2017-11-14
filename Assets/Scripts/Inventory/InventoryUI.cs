@@ -150,69 +150,7 @@ public class InventoryUI : MonoBehaviour
         }       
 
         _inventoryLength = _inventory.Items.Count;
-        _stacked = false;        
-
-        //for (int i = 0; i < slots.Length; i++)
-        //{
-        //    if(i < _inventory.Items.Count)
-        //    {
-        //        if(_inventory.Items[_inventory.Items.Count - 1].TypeOfItem == ItemType.StackableItem)
-        //        {
-        //            if (_inventory.Items [i].TypeOfItem == ItemType.StackableItem)
-        //            {
-        //                StackableItem stackableItem = (StackableItem) _inventory.Items [i];                        
-
-        //                if (slots [i].Item != null && slots [i].Item.ItemName == _inventory.Items [_inventory.Items.Count - 1].ItemName)
-        //                {
-        //                    slots [i].StackableItemData.LimitedStackSize = stackableItem.HasStackLimit;
-
-        //                    if (slots [i].StackableItemData.LimitedStackSize)
-        //                    {
-        //                        if (slots [i].StackableItemData.StackSize < slots [i].StackableItemData.StackLimit)
-        //                        {
-        //                            if (!_stacked)
-        //                            {
-        //                                slots [i].StackableItemData.StackSize++;
-        //                                slots [i].StackableItemData.UpdateStack ();
-
-        //                                _inventory.Items.RemoveAt (_inventory.Items.Count - 1);
-        //                                _stacked = true;
-        //                            }
-        //                        }
-        //                        else
-        //                        {
-        //                            slots [i].AddItem (_inventory.Items [i]);
-        //                        }
-        //                    }
-        //                    else
-        //                    {
-        //                        if (!_stacked)
-        //                        {
-        //                            slots [i].StackableItemData.StackSize++;
-        //                            slots [i].StackableItemData.UpdateStack ();
-
-        //                            _inventory.Items.RemoveAt (_inventory.Items.Count - 1);
-        //                            _stacked = true;
-        //                        }
-        //                    }
-        //                }
-        //                else
-        //                {
-        //                    slots [i].AddItem (_inventory.Items [i]);
-        //                }
-        //            }
-        //        }
-        //        else
-        //        {
-        //            slots [i].AddItem (_inventory.Items [i]);
-        //        }                
-        //    }
-        //    else
-        //    {
-        //        slots [i].ClearSlot ();
-        //    }
-        //}
-        //_stacked = false;         
+        _stacked = false;              
     }  
     
     private void AddRowToInventory()

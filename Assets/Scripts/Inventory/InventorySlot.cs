@@ -12,9 +12,11 @@ public class InventorySlot : MonoBehaviour
 
     public bool IsEmpty = true;
 
+    public int CurrentDurability;
+
     public void AddItem(Item newItem)
     {
-        Item = newItem;
+        Item = newItem;        
 
         Icon.sprite = Item.Icon;
         Icon.enabled = true;
@@ -42,6 +44,8 @@ public class InventorySlot : MonoBehaviour
         else
         {
             StackNumber.enabled = false;
+            Equipment equipment = (Equipment) newItem;
+            CurrentDurability = equipment.Durability;
         }
 
         IsEmpty = false;

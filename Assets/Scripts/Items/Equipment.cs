@@ -12,6 +12,8 @@ public class Equipment : Item
     public int AgilityModifier;
     public int InteligenceModifier;
 
+    public int Durability;
+
     private void Awake ( )
     {
         TypeOfItem = ItemType.EquipableItem;

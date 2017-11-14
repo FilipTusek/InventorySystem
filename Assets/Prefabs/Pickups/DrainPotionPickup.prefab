@@ -20,9 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4390704046542388}
   - component: {fileID: 212574024155099650}
-  - component: {fileID: 114841088911314828}
   - component: {fileID: 50660996367470440}
   - component: {fileID: 61937492017464136}
+  - component: {fileID: 114841088911314828}
   m_Layer: 0
   m_Name: DrainPotionPickup
   m_TagString: Item

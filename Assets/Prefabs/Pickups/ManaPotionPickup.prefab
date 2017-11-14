@@ -20,9 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4856885136725780}
   - component: {fileID: 212775468925437862}
-  - component: {fileID: 114654401543326906}
   - component: {fileID: 50886854664478188}
   - component: {fileID: 61165889144548172}
+  - component: {fileID: 114654401543326906}
   m_Layer: 0
   m_Name: ManaPotionPickup
   m_TagString: Item

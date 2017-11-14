@@ -9,16 +9,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ade6d6c9cb0e544799190e4ef624d03, type: 3}
-  m_Name: MetalHelmet
+  m_Name: GoldishHelmet
   m_EditorClassIdentifier: 
-  ItemName: Metal Helmet
-  Icon: {fileID: 21300000, guid: db1b1e6257fec654b999354ca4087177, type: 3}
-  ItemPrefab: {fileID: 1415806312069918, guid: fbe8f2d1356f64440a7de1aff4479af1, type: 2}
+  ItemName: Goldish Helmet
+  Icon: {fileID: 21300000, guid: a919e0cbd15a34b4eb1d957318c506d7, type: 3}
+  ItemPrefab: {fileID: 1193443349734988, guid: 00fd823f0ed51a648894bbbbc9596cb3, type: 2}
   ItemCategory: 2
   TypeOfItem: 1
   EquipmentSlot: 0
   StrengthModifier: 0
   DexterityModifier: 0
   AgilityModifier: 0
-  InteligenceModifier: 5
-  Durability: 5
+  InteligenceModifier: 10
+  Durability: 10

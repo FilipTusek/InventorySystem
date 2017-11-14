@@ -21,3 +21,4 @@ MonoBehaviour:
   DexterityModifier: 0
   AgilityModifier: 0
   InteligenceModifier: 0
+  Durability: 5

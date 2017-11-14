@@ -6,11 +6,10 @@ using UnityEngine.Analytics;
 public class PlayerMovement : MonoBehaviour {
 
     public float movementSpeed = 5.0f;
+    public float DistanceTraveled;
 
     private float _moveHorizontal;
-    private float _moveVertical;
-
-    private float _distanceTraveled;
+    private float _moveVertical;    
 
     private int _analyticsEventCalls = 0;
 
@@ -52,16 +51,16 @@ public class PlayerMovement : MonoBehaviour {
 
         float distance = Vector3.Distance (_lastPosition, transform.position);
         _lastPosition = transform.position;
-        _distanceTraveled += distance;
+        DistanceTraveled += distance;
 
-        if(_distanceTraveled >= 10.0f)
+        if(DistanceTraveled >= 10.0f)
         {
             if (_analyticsEventCalls < 5)
             {
                 Analytics.CustomEvent ("Traveled 10 units");
                 _analyticsEventCalls++;
             }
-            _distanceTraveled = 0.0f;
+            DistanceTraveled = 0.0f;
         }
 	}
 

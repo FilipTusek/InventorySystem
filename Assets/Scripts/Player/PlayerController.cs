@@ -80,6 +80,18 @@ public class PlayerController : MonoBehaviour
         screen.SetActive (!screen.activeSelf);        
     }
 
+    public void TogglePickupMethod()
+    {
+        if(PickUpItemOnCollision)
+        {
+            PickUpItemOnCollision = false;
+        }
+        else
+        {
+            PickUpItemOnCollision = true;
+        }
+    }
+
     private void OnTriggerEnter2D ( Collider2D collision )
     {
         if (PickUpItemOnCollision)

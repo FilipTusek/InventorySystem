@@ -80,9 +80,7 @@ public class PlayerStats : MonoBehaviour
     public IEnumerator BuffWithConstantValue(string stat, float buffPercent, float time, Sprite sprite)
     {
         float modifier;
-        float buffTime = time;
-      
-        bool buffActive = false;
+        float buffTime = time;      
 
         if (stat == "Strength")
         {
@@ -90,65 +88,44 @@ public class PlayerStats : MonoBehaviour
             Strength.AddModifier ((int) modifier);
 
             _attributesUI.UpdateAttributes ();
-                        
-            for (int i = 0; i < Buffs.Count; i++)
-            {
-                if (!buffActive)
-                {
-                    if (Buffs [i].sprite == null)
-                    {                                              
-                        buffActive = true;
-                        _buffSlot = i;
-                        yield return 0;
-                    }
-                }
-            }
 
-            Buffs [_buffSlot].gameObject.SetActive (true);
+            FindFreeBuffIcon ();
 
-            Buffs [_buffSlot].sprite = sprite;            
+            int slot = _buffSlot;
+
+            Buffs [slot].gameObject.SetActive (true);
+            Buffs [slot].sprite = sprite;            
             
             while (buffTime > 0.0f)
             {
                 buffTime -= Time.deltaTime;
 
-                Buffs [_buffSlot].fillAmount = buffTime / time;
+                Buffs [slot].fillAmount = buffTime / time;
                 yield return 0;
             }
             Strength.RemoveModifier ((int) modifier);
 
             _attributesUI.UpdateAttributes ();
 
-            Buffs [_buffSlot].sprite = null;
-            Buffs [_buffSlot].gameObject.SetActive (false);
+            Buffs [slot].sprite = null;
+            Buffs [slot].gameObject.SetActive (false);
         }
     }
 
-    public IEnumerator BuffGradualyAndHoldValue(string stat, int amount, int changeTime, float duration, Sprite sprite)
+    public IEnumerator BuffGradualyAndHoldValue(string stat, float amount, int changeTime, float duration, Sprite sprite)
     {
         float time = 0;      
 
         float changeAmount = amount / changeTime;
         float currentChange = 0;
 
-        bool buffActive = false;
+        FindFreeBuffIcon ();
 
-        for (int i = 0; i < Buffs.Count; i++)
-        {
-            if (!buffActive)
-            {
-                if (Buffs [i].sprite == null)
-                {                   
-                    buffActive = true;
-                    _buffSlot = i;
-                    yield return 0;
-                }
-            }
-        }
+        int slot = _buffSlot;
 
-        Buffs [_buffSlot].gameObject.SetActive (true);
+        Buffs [slot].gameObject.SetActive (true);
 
-        Buffs [_buffSlot].sprite = sprite;
+        Buffs [slot].sprite = sprite;
 
         if (stat == "Dexterity")
         {
@@ -166,7 +143,7 @@ public class PlayerStats : MonoBehaviour
                     currentChange += changeAmount * Time.deltaTime;
                 }
 
-                Buffs [_buffSlot].fillAmount = (duration + changeTime - time) / (duration + changeTime);
+                Buffs [slot].fillAmount = (duration + changeTime - time) / (duration + changeTime);
 
                 time += Time.deltaTime;                
                 yield return 0;
@@ -176,21 +153,66 @@ public class PlayerStats : MonoBehaviour
 
             while (time > changeTime && time < duration + changeTime)
             {
-                Buffs [_buffSlot].fillAmount = (duration + changeTime - time) / (duration + changeTime);
+                Buffs [slot].fillAmount = (duration + changeTime - time) / (duration + changeTime);
                 time += Time.deltaTime;               
                 yield return 0;
             }
+
+            Buffs [slot].sprite = null;
+            Buffs [slot].gameObject.SetActive (false);
 
             for (int i = 0; i < amount; i++)
             {
                 Dexterity.RemoveModifier (1);                
                 yield return 0;
             }
-            _attributesUI.UpdateAttributes ();
-
-            Buffs [_buffSlot].sprite = null;
-            Buffs [_buffSlot].gameObject.SetActive (false);
+            _attributesUI.UpdateAttributes ();            
         }        
+    }
+
+    public IEnumerator HealOverTime ( float amount, float duration, Sprite sprite )
+    {
+        float tickAmount = amount / duration;
+
+        float buffTime = duration;
+
+        FindFreeBuffIcon ();
+
+        int slot = _buffSlot;
+
+        Buffs [slot].gameObject.SetActive (true);
+        Buffs [slot].sprite = sprite;
+
+        while (buffTime > 0)
+        {
+            Heal (tickAmount * Time.deltaTime);          
+
+            buffTime -= Time.deltaTime;
+
+            Buffs [slot].fillAmount = buffTime / duration;
+
+            yield return 0;
+        }
+
+        Buffs [slot].sprite = null;
+        Buffs [slot].gameObject.SetActive (false);        
+    }
+
+    private void FindFreeBuffIcon()
+    {
+        bool buffActive = false;
+
+        for (int i = 0; i < Buffs.Count; i++)
+        {
+            if (!buffActive)
+            {
+                if (Buffs [i].sprite == null)
+                {
+                    buffActive = true;
+                    _buffSlot = i;                    
+                }
+            }
+        }
     }
 
     private void OnEquipmentChanged (Equipment newItem, Equipment oldItem)

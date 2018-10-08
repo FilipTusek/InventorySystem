@@ -9,45 +9,45 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1043907535673408}
+  m_RootGameObject: {fileID: 1410316974531218}
   m_IsPrefabAsset: 1
---- !u!1 &1043907535673408
+--- !u!1 &1410316974531218
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4597868252984424}
-  - component: {fileID: 212492504633565662}
-  - component: {fileID: 114397055775158302}
-  - component: {fileID: 61822682586208014}
+  - component: {fileID: 4140350999211828}
+  - component: {fileID: 212290905791514360}
+  - component: {fileID: 114618822119748332}
+  - component: {fileID: 61517114722257610}
   m_Layer: 9
-  m_Name: WoodenShieldPickup
+  m_Name: EquipmentPickup
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4597868252984424
+--- !u!4 &4140350999211828
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1043907535673408}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.14, y: -0.44, z: 0}
+  m_GameObject: {fileID: 1410316974531218}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.45, y: -0.41, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61822682586208014
+--- !u!61 &61517114722257610
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1043907535673408}
+  m_GameObject: {fileID: 1410316974531218}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -67,27 +67,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
---- !u!114 &114397055775158302
+--- !u!114 &114618822119748332
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1043907535673408}
+  m_GameObject: {fileID: 1410316974531218}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: addcf419492b70044a45f5cd4951e7f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MyItem: {fileID: 11400000, guid: 438c431981fee4242a954180b6ef233c, type: 2}
+  MyItem: {fileID: 11400000, guid: f56d3213f7b71cc48b623f74256ae245, type: 2}
   PickupRadius: 1
   DistanceToPlayer: 0
   HighlitedColor: {r: 0.78676474, g: 0, b: 0, a: 1}
---- !u!212 &212492504633565662
+--- !u!212 &212290905791514360
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1043907535673408}
+  m_GameObject: {fileID: 1410316974531218}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -117,7 +117,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 83f2d18181327e342bf03699b2007fb9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4265166bf2d49c740be2455ea0c06405, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -32,6 +32,8 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
 
     private Image _itemImage;
 
+    private Transform _transform;
+
     private bool _pointerOver = false;    
 
     private void Start ( )
@@ -56,6 +58,8 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
 
         _equipmentTooltip = _equipmentTooltipScreen.GetComponent<Tooltip> ();
         _consumableTooltip = _consumableTooltipScreen.GetComponent<Tooltip> ();
+
+        _transform = transform;
     }
 
     private void Update ( )
@@ -72,21 +76,21 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
         {
             if (_inventoryScreen.activeSelf || _equipmentScreen.activeSelf)
             {
-                transform.position = Input.mousePosition;
+                _transform.position = Input.mousePosition;
             }
             else
             {
                 IsDragged = false;
                 _dragAndDropManager.ItemBeingDragged = false;
-                transform.SetParent (_slotTransform);
+                _transform.SetParent (_slotTransform);
                 _dragAndDropManager.DraggedItem = null;
                 _itemImage.raycastTarget = true;
             }
         }
         else
         {
-            transform.SetParent (_slotTransform);
-            transform.localPosition = Vector2.zero;
+            _transform.SetParent (_slotTransform);
+            _transform.localPosition = Vector2.zero;
             _itemImage.raycastTarget = true;
         }
     }
@@ -178,7 +182,7 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
                     Slot.IsEmpty = true;
                     _dragAndDropManager.ItemBeingDragged = true;
 
-                    transform.SetParent (transform.root.transform);
+                    _transform.SetParent (_transform.root.transform);
 
                     _dragAndDropManager.DraggedItemSlot = Slot;
                     _dragAndDropManager.DraggedItem = this;
@@ -195,7 +199,7 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
                 {
                     IsDragged = false;
                     _dragAndDropManager.ItemBeingDragged = false;
-                    transform.SetParent (_slotTransform);
+                    _transform.SetParent (_slotTransform);
 
                     _itemImage.raycastTarget = true;                   
 
@@ -238,7 +242,7 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
             {
                 IsDragged = false;
                 _dragAndDropManager.ItemBeingDragged = false;
-                transform.SetParent (_slotTransform);
+                _transform.SetParent (_slotTransform);
 
                 _itemImage.raycastTarget = true;
 
@@ -306,7 +310,7 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
             _equipmentManager.Equip (item);
 
             item.RemoveFromInventroy ();
-            transform.SetParent (_slotTransform);
+            _transform.SetParent (_slotTransform);
 
             IsDragged = false;
             _dragAndDropManager.ItemBeingDragged = false;

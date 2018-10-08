@@ -31,6 +31,8 @@ public class ItemPickup : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
         _inventory = Inventory.instance;
         _equipmentManager = EquipmentManager.instance;
         _spriteRenderer = GetComponentInChildren<SpriteRenderer> ();
+
+        SetupItemPickup();
     }
 
     private void Update ( )
@@ -75,13 +77,7 @@ public class ItemPickup : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
             {"Item Name", MyItem.ItemName},
             {"Item Type", MyItem.TypeOfItem.ToString()}
         });
-    }
-
-    private void OnDrawGizmosSelected ( )
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere (transform.position, PickupRadius);
-    }  
+    }    
     
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -97,11 +93,21 @@ public class ItemPickup : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     public void OnPointerEnter(PointerEventData eventData)
     {
         _spriteRenderer.color = HighlitedColor;
-        print("Enter");
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         _spriteRenderer.color = Color.white;
+    }
+
+    private void SetupItemPickup()
+    {
+        _spriteRenderer.sprite = MyItem.Icon;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, PickupRadius);
     }
 }

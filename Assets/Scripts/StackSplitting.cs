@@ -17,7 +17,9 @@ public class StackSplitting : MonoBehaviour
     private InventoryUI _inventoryUI;
 
     public int StackAmount;
-    public int StackMaximum;    
+    public int StackMaximum;
+
+    private int _newStackAmount;
 
     private void Awake ( )
     {
@@ -61,9 +63,20 @@ public class StackSplitting : MonoBehaviour
     }
 
     public void UpdateInputValue()
-    {        
-        StackAmount = int.Parse(StackText.text);         
-        StackSlider.value = StackAmount;
+    {  
+        if (int.TryParse(StackText.text, out _newStackAmount))
+        {
+            if (_newStackAmount > 0 && _newStackAmount <= StackMaximum)
+            {
+                StackAmount = _newStackAmount;
+                StackSlider.value = StackAmount;
+            }
+            else
+            {
+                StackText.text = StackAmount.ToString();
+                StackSlider.value = StackAmount;
+            }
+        }
     }
 
     public void SplitStack()

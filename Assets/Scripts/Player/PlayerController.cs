@@ -8,6 +8,10 @@ public class PlayerController : MonoBehaviour
 {
     public static PlayerController instance;
 
+    public Text TogglePickupMethodButtonText;
+    public string CollisionPickUp;
+    public string ClickToPickUp;
+
     public bool PickUpItemOnCollision = true;
 
     private InventoryUI _inventoryUI;
@@ -77,7 +81,8 @@ public class PlayerController : MonoBehaviour
 
     public void ToggleScreen(GameObject screen)
     {
-        screen.SetActive (!screen.activeSelf);        
+        screen.SetActive (!screen.activeSelf); 
+        // Dodat Analytics (12.3.5)
     }
 
     public void TogglePickupMethod()
@@ -85,10 +90,12 @@ public class PlayerController : MonoBehaviour
         if(PickUpItemOnCollision)
         {
             PickUpItemOnCollision = false;
+            TogglePickupMethodButtonText.text = ClickToPickUp;
         }
         else
         {
             PickUpItemOnCollision = true;
+            TogglePickupMethodButtonText.text = CollisionPickUp;
         }
     }
 

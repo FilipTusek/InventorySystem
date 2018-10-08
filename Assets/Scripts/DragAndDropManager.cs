@@ -32,8 +32,7 @@ public class DragAndDropManager : MonoBehaviour
         if(Input.GetMouseButtonUp (0) && DraggedItemSlot != null && DraggedItemSlot.Item != null && Drop)
         {
             DropItem ();
-        }           
-        
+        }
     }
 
     public void DropItem()

@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	void Awake ()
     {
-        _playerAC = GetComponent<Animator>();
+        _playerAC = GetComponentInChildren<Animator>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
 
         _moveHorizontal = 0.0f;
@@ -60,7 +60,7 @@ public class PlayerMovement : MonoBehaviour {
                 Analytics.CustomEvent ("Traveled 10 units");
                 _analyticsEventCalls++;
             }
-            DistanceTraveled = 0.0f;
+            DistanceTraveled -= 10.0f;
         }
 	}
 

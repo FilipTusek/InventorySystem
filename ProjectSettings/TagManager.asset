@@ -15,7 +15,7 @@ TagManager:
   - 
   - 
   - Player
-  - 
+  - ItemPickup
   - 
   - 
   - 
@@ -44,4 +44,10 @@ TagManager:
     locked: 0
   - name: InventoryIcons
     uniqueID: 668330881
+    locked: 0
+  - name: ItemPickup
+    uniqueID: 3946395929
+    locked: 0
+  - name: Player
+    uniqueID: 3700688315
     locked: 0

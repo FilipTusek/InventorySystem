@@ -30,7 +30,7 @@ public class ItemPickup : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
         _playerController = PlayerController.instance;
         _inventory = Inventory.instance;
         _equipmentManager = EquipmentManager.instance;
-        _spriteRenderer = GetComponent<SpriteRenderer> ();
+        _spriteRenderer = GetComponentInChildren<SpriteRenderer> ();
     }
 
     private void Update ( )
@@ -97,6 +97,7 @@ public class ItemPickup : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     public void OnPointerEnter(PointerEventData eventData)
     {
         _spriteRenderer.color = HighlitedColor;
+        print("Enter");
     }
 
     public void OnPointerExit(PointerEventData eventData)

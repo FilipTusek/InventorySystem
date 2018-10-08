@@ -95,14 +95,14 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
     {
         if (Input.GetMouseButton (0) && Input.GetKeyDown (KeyCode.T) && _pointerOver)
         {
-            _dragAndDropManager.DraggedItemSlot = _slotTransform.gameObject.GetComponent<InventorySlot> ();
+            _dragAndDropManager.DraggedItemSlot = Slot;
             _dragAndDropManager.DraggedItem = this;
             _dragAndDropManager.DropItem ();
         }
 
         if (_pointerOver && Input.GetKeyDown (KeyCode.Z))
         {
-            _dragAndDropManager.DraggedItemSlot = _slotTransform.gameObject.GetComponent<InventorySlot> ();
+            _dragAndDropManager.DraggedItemSlot = Slot;
             _dragAndDropManager.DraggedItem = this;
             _dragAndDropManager.DropItem ();
         }
@@ -180,7 +180,7 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
 
                     transform.SetParent (transform.root.transform);
 
-                    _dragAndDropManager.DraggedItemSlot = _slotTransform.gameObject.GetComponent<InventorySlot> ();
+                    _dragAndDropManager.DraggedItemSlot = Slot;
                     _dragAndDropManager.DraggedItem = this;
 
                     _itemImage.raycastTarget = false;
@@ -369,7 +369,10 @@ public class DragAndDrop : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
                 }
                 else if(Slot.Item.TypeOfItem == ItemType.StackableItem)
                 {
-                    ShowStackSplitScreen ();
+                    if (Slot.StackableItemData.StackSize > 1)
+                    {
+                        ShowStackSplitScreen ();
+                    }
                 }
             }
 

@@ -61,8 +61,8 @@ public class StackSplitting : MonoBehaviour
     }
 
     public void UpdateInputValue()
-    {
-        StackAmount = int.Parse(StackText.text);
+    {        
+        StackAmount = int.Parse(StackText.text);         
         StackSlider.value = StackAmount;
     }
 
